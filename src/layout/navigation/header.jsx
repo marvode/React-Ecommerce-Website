@@ -11,6 +11,7 @@ class PageHeader extends Component {
 		this.state = {
 			isMenuOpen: false,
 			isAccountOpen: false,
+			img: './img/7.jpg',
 		};
 	}
 
@@ -19,18 +20,18 @@ class PageHeader extends Component {
 		this.setState((prevState) => !prevState.isMenuOpen);
 	};
 
-	// toggleAccount = () => {
-	// 	document.getElementById("account").classList.toggle("hidden");
-	// 	document.getElementById("closeAccount").classList.toggle("hidden");
+	toggleAccount = () => {
+		document.getElementById("account").classList.toggle("hidden");
+		document.getElementById("closeAccount").classList.toggle("hidden");
 
-	// 	this.setState(prevState => !prevState.isAccountOpen);
-	// };
+		this.setState(prevState => !prevState.isAccountOpen);
+	};
 
-	// closeAccount = () => {
-	// 	document.getElementById('account').classList.add('hidden');
-	// 	document.getElementById('closeAccount').classList.add('hidden');
-	// 	this.setState(prevState => !prevState.isAccountOpen);
-	// }
+	closeAccount = () => {
+		document.getElementById('account').classList.add('hidden');
+		document.getElementById('closeAccount').classList.add('hidden');
+		this.setState(prevState => !prevState.isAccountOpen);
+	}
 
 	render() {
 		return (
@@ -62,7 +63,7 @@ class PageHeader extends Component {
 					<Item classes="px-2" body="Our Offers" />
 					<Item classes="px-2 mt-1" body="Contact Us" />
 					<Item classes="px-2 mt-1" body="About Us" />
-					<AccountDropdown classes="sm:ml-4" />
+					<AccountDropdown classes="sm:ml-4" img={this.state.img} toggleAccount={this.toggleAccount} closeAccount={this.closeAccount}/>
 				</div>
 			</header>
 		);

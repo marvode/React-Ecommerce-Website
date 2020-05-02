@@ -3,7 +3,12 @@ import AccountDropdownItem from "./AccountDropdownItem";
 
 import "../../../css/tailwind.css";
 
-const AccountDropdown = ({ classes, img, toggleAccount=f=>f, closeAccount=f=>f}) => {
+const AccountDropdown = ({
+	classes,
+	img,
+	toggleAccount = (f) => f,
+	closeAccount = (f) => f,
+}) => {
 	return (
 		<div className={classes}>
 			<div className="relative hidden sm:block" id="sm-above">

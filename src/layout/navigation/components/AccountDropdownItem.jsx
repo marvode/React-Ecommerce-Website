@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../css/tailwind.css";
 
 const AccountDropdownItem = (props) => {
 	return (

@@ -1,8 +1,6 @@
 import React from "react";
 import AccountDropdownItem from "./AccountDropdownItem";
 
-import "../../../css/tailwind.css";
-
 const AccountDropdown = ({
 	classes,
 	img,
@@ -24,7 +22,7 @@ const AccountDropdown = ({
 				</button>
 				<button
 					onClick={closeAccount}
-					tabindex="-1"
+					tabIndex="-1"
 					className="z-10 fixed hidden inset-0 h-full w-full bg-black opacity-50 cursor-default"
 					id="closeAccount"
 				></button>

@@ -1,9 +1,10 @@
 import React from 'react';
+import Category from '../components/Category';
 
 const Homepage = () => {
 	return (
 		<div>
-			<h1>Welcome to the home page</h1>
+			<Category/>
 		</div>
 	);
 }

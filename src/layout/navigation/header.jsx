@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import "../../css/tailwind.css";
 import Navbar from "./Navbar";
 
 class PageHeader extends Component {

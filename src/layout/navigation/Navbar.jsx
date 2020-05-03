@@ -3,8 +3,6 @@ import React from "react";
 import AccountDropdown from "./components/AccountDropdown";
 import Item from "./components/Item";
 
-import "../../css/tailwind.css";
-
 const Navbar = ({
 	img,
 	toggleMenu = (f) => f,
@@ -16,7 +14,7 @@ const Navbar = ({
 			<div className="flex px-6 py-3 sm:p-0 justify-between items-center">
 				<div className="text-gray-300">
 					<svg
-						className="fill-current h-10 mr-2 "
+						className="fill-current h-8 mr-2 "
 						viewBox="0 0 54 54"
 						xmlns="http://www.w3.org/2000/svg"
 					>
@@ -39,7 +37,7 @@ const Navbar = ({
 					</button>
 				</div>
 			</div>
-			<div className="hidden pt-2 pb-4 sm:flex" id="menu">
+			<div className="hidden sm:flex" id="menu">
 				<Item classes="px-2" body="Our Offers" />
 				<Item classes="px-2 mt-1" body="Contact Us" />
 				<Item classes="px-2 mt-1" body="About Us" />

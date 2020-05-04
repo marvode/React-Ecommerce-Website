@@ -1,10 +1,12 @@
 import React from 'react';
 import Category from '../components/Category';
 
-const Homepage = () => {
+import data from '../shopData';
+
+const Homepage = () => {	
 	return (
 		<div>
-			<Category/>
+			<Category data={data}/>
 		</div>
 	);
 }

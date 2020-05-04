@@ -10,7 +10,7 @@ const CategoryItem = ({ img, name }) => {
 					alt=""
 				/>
 				<div className="absolute w-3/4 p-3 bg-gray-100 bg-opacity-25">
-					<p className="text-center">{name}</p>
+					<p className="text-center text-gray-900">{name}</p>
 				</div>
 			</div>
 		</div>

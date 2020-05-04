@@ -5,11 +5,9 @@ import Homepage from "./pages/homepage";
 import Login from "./pages/login";
 import PageHeader from "./layout/navigation/header";
 
-import "./App.css";
-
 function App() {
 	return (
-		<div className="App">
+		<div className="App text-gray-800">
 			<PageHeader />
 			<div className="py-8 px-6">
 				<BrowserRouter>

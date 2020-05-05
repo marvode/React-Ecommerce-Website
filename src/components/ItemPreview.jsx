@@ -4,7 +4,7 @@ const ItemPreview = ({ img, name, price }) => {
 	return (
 		<div className="shadow overflow-hidden hover:shadow-lg">
 			<div className="bg-white antialiased shadow">
-				<div className="relative hover:bg-opacity-25" style={{ paddingBottom: "100%" }}>
+				<div className="relative" style={{ paddingBottom: "100%" }}>
 					<img
 						className="absolute top-0 h-full w-full object-cover"
 						src={img}

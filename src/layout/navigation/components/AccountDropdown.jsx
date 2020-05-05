@@ -12,12 +12,12 @@ const AccountDropdown = ({
 			<div className="relative hidden sm:block" id="sm-above">
 				<button
 					onClick={toggleAccount}
-					className="relative block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-gray-300"
+					className="relative block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-100 focus:outline-none focus:border-gray-300"
 				>
 					<img
 						className="h-full w-full object-cover"
 						src={img}
-						alt="Hello"
+						alt=""
 					/>
 				</button>
 				<button
@@ -33,44 +33,50 @@ const AccountDropdown = ({
 					<AccountDropdownItem
 						classes="text-gray-800 py-2 px-4 hover:bg-gray-500"
 						body="Account Settings"
+						to="/account"
 					/>
 					<AccountDropdownItem
 						classes="text-gray-800 py-2 px-4 hover:bg-gray-500"
-						body="Support"
+						body="Profile"
+						to="/profile"
 					/>
 					<AccountDropdownItem
 						classes="text-gray-800 py-2 px-4 hover:bg-gray-500"
-						body="Sign Out"
+						body="Log Out"
+						to="/logout"
 					/>
 				</div>
 			</div>
-
+			{/* for mobile device */}
 			<div
-				className="sm:hidden text-gray-300 px-2 py-5 border-t border-gray-700"
+				className="sm:hidden text-gray-800 px-2 py-5 border-t border-gray-200"
 				id="mobile"
 			>
 				<div className="flex items-center">
 					<img
-						className="h-8 w-8 rounded-full object-cover border-2 border-gray-600"
+						className="h-8 w-8 rounded-full object-cover border-2 border-gray-100"
 						src={img}
-						alt="hello"
+						alt=""
 					/>
-					<span className="ml-3 font-semibold text-white">
+					<span className="ml-3 font-semibold text-gray-700">
 						Jane Doe
 					</span>
 				</div>
 				<div className="mt-4">
 					<AccountDropdownItem
-						classes="mt-2 hover:text-white"
+						classes="mt-2 hover:text-gray-600"
 						body="Account Settings"
+						to="/account"
 					/>
 					<AccountDropdownItem
-						classes="mt-2 hover:text-white"
-						body="Support"
+						classes="mt-2 hover:text-gray-600"
+						body="Profile"
+						to="/profile"
 					/>
 					<AccountDropdownItem
-						classes="mt-2 hover:text-white"
-						body="Sign Out"
+						classes="mt-2 hover:text-gray-600"
+						body="Log Out"
+						to="/logout"
 					/>
 				</div>
 			</div>

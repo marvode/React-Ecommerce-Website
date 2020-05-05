@@ -10,9 +10,9 @@ const Navbar = ({
 	closeAccount = (f) => f,
 }) => {
 	return (
-		<header className="bg-gray-800 sm:px-10 sm:py-3 sm:flex sm:items-center justify-between">
+		<nav className="sm:px-10 sm:py-3 sm:flex sm:items-center justify-between shadow">
 			<div className="flex px-6 py-3 sm:p-0 justify-between items-center">
-				<div className="text-gray-300">
+				<div className="text-gray-700">
 					<svg
 						className="fill-current h-8 mr-2 "
 						viewBox="0 0 54 54"
@@ -24,7 +24,7 @@ const Navbar = ({
 				<div className="sm:hidden">
 					<button
 						onClick={toggleMenu}
-						className="block border border-gray-500 p-2 text-gray-500 rounded focus:text-white focus:outline-none focus:shadow-outline hover:text-white hover:border-white"
+						className="block border border-gray-700 p-2 text-gray-700 rounded focus:text-gray-900 focus:outline-none focus:shadow-outline hover:text-gray-900 hover:border-black"
 					>
 						<svg
 							className="fill-current h-5 w-5"
@@ -37,10 +37,11 @@ const Navbar = ({
 					</button>
 				</div>
 			</div>
-			<div className="hidden sm:flex" id="menu">
-				<Item classes="px-2" body="Our Offers" />
-				<Item classes="px-2 mt-1" body="Contact Us" />
-				<Item classes="px-2 mt-1" body="About Us" />
+			<div className="hidden sm:flex px-5" id="menu">
+				<Item classes="px-2" body="Our Offers" to="/offers"/>
+				<Item classes="px-2 mt-1" body="Contact Us" to="/contact"/>
+				<Item classes="px-2 mt-1" body="About Us" to="/about"/>
+				<Item classes="px-2 mt-1" body="Login" to="/login"/>
 				<AccountDropdown
 					classes="sm:ml-4"
 					img={img}
@@ -48,7 +49,7 @@ const Navbar = ({
 					closeAccount={closeAccount}
 				/>
 			</div>
-		</header>
+		</nav>
 	);
 };
 

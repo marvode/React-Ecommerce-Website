@@ -1,11 +1,15 @@
 import React from "react";
+import { withRouter } from "react-router";
 
-const AccountDropdownItem = (props) => {
+const AccountDropdownItem = ({ classes, body, to, history }) => {
 	return (
-		<a className={`block ${props.classes}`} href={props.href}>
-			{props.body}
-		</a>
+		<button
+			className={`block w-full text-left focus:outline-none focus:border-0 ${classes}`}
+			onClick={() => history.push(to)}
+		>
+			{body}
+		</button>
 	);
 };
 
-export default AccountDropdownItem;
+export default withRouter(AccountDropdownItem);

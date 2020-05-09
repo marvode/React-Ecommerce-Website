@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import AccountDropdown from "./components/AccountDropdown";
 import Item from "./components/Item";
+import Cart from '../../components/Cart'
 
 class Navbar extends Component {
 	constructor(props) {
@@ -48,16 +50,26 @@ class Navbar extends Component {
 						</button>
 					</div>
 				</div>
-				<div className="hidden sm:flex px-5" id="menu">
+				<div className="hidden sm:flex px-5 pb-2 sm:pb-0" id="menu">
 					<Item classes="px-2" body="Shop" to="/shop" />
 					<Item classes="px-2 mt-1" body="Contact Us" to="/contact" />
-					<Item classes="px-2 mt-1" body="About Us" to="/about" />
-					<Item classes="px-2 mt-1" body="Login" to="/login" />
-					<AccountDropdown classes="sm:ml-4" />
+					<Cart/>
+					{!this.props.currentUser ?
+					(<Item
+						classes="px-2 mt-1 sm:mr-2"
+						body="Login"
+						to="/login"
+					/>)
+					:
+					(<AccountDropdown classes="sm:ml-4" />)}
 				</div>
 			</nav>
 		);
 	}
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+	currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Navbar);

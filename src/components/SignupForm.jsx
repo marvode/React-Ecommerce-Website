@@ -1,16 +1,32 @@
 import React, { Component } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import Label from "../components/Label";
+import User from "../utils/User"
 
 class SignupForm extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			name: null,
+			email: null,
+			password: null,
+			password_confirmation: null,
+			response : {}
+		};
 	}
 
 	handleSignupForm = (e) => {
 		e.preventDefault();
+		const { name, email, password, password_confirmation } = this.state;
+		User.signup({ name, email, password, password_confirmation }).then(res => {
+			this.setState({ response: res })
+			console.log(this.state)
+		})
+	};
+
+	handleChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
 	};
 
 	render() {
@@ -20,21 +36,37 @@ class SignupForm extends Component {
 			>
 				<p className="pb-4 text-xl">Create A New Account</p>
 				<form onSubmit={this.handleSignupForm}>
-					<Label value="Name" />
-					<Input name="name" placeholder="Name" type="text" />
-					<Label value="Email" />
-					<Input name="email" placeholder="Email" type="email" />
-					<Label value="Password" />
+					<Input
+						name="name"
+						placeholder="Name"
+						type="text"
+						handleChange={this.handleChange}
+						label="Name"
+						required
+					/>
+					<Input
+						name="email"
+						placeholder="Email"
+						type="email"
+						handleChange={this.handleChange}
+						label="Email"
+						required
+					/>
 					<Input
 						name="password"
 						placeholder="Password"
 						type="password"
+						handleChange={this.handleChange}
+						label="Password"
+						required
 					/>
-					<Label value="Confirm Password" />
 					<Input
 						name="password_confirmation"
 						placeholder="Confirm Password"
 						type="password"
+						handleChange={this.handleChange}
+						label="Confirm Password"
+						required
 					/>
 					<Button
 						value="Sign Up"

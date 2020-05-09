@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AccountDropdownItem from "./AccountDropdownItem";
+import Logout from "./Logout";
 
 class AccountDropdown extends Component {
 	constructor(props) {
@@ -23,7 +24,7 @@ class AccountDropdown extends Component {
 	};
 	render() {
 		return (
-			<div className={this.classes}>
+			<div className={this.props.classes}>
 				<div className="relative hidden sm:block" id="sm-above">
 					<button
 						onClick={this.toggleAccount}
@@ -55,11 +56,7 @@ class AccountDropdown extends Component {
 							body="Profile"
 							to="/profile"
 						/>
-						<AccountDropdownItem
-							classes="text-gray-800 py-2 px-4 hover:bg-gray-500"
-							body="Log Out"
-							to="/logout"
-						/>
+						<Logout classes="text-gray-800 py-2 px-4 hover:bg-gray-500" />
 					</div>
 				</div>
 				{/* for mobile device */}
@@ -88,11 +85,7 @@ class AccountDropdown extends Component {
 							body="Profile"
 							to="/profile"
 						/>
-						<AccountDropdownItem
-							classes="mt-2 hover:text-gray-600"
-							body="Log Out"
-							to="/logout"
-						/>
+						<Logout classes="mt-2 hover:text-gray-600"/>
 					</div>
 				</div>
 			</div>

@@ -28,7 +28,7 @@ export default class Cart extends Component {
 						className="z-10 fixed hidden inset-0 h-full w-full bg-black opacity-50 cursor-default"
 						id="closeCartDropdown"
 					></button>
-					<CartDropdown classes="absolute z-10 hidden right-0 mt-1 py-2  bg-white rounded-lg shadow-xl"/>
+					<CartDropdown/>
 				</div>
 			</div>
 		);

@@ -13,7 +13,8 @@ class AppStorage {
 	}
 
 	static clear() {
-		localStorage.removeItem("token");
+		localStorage.removeItem("access_token");
+		localStorage.removeItem("refresh_token");
 	}
 }
 

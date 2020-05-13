@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import CartItem from "./CartItem";
+import { selectCartItems } from "../redux/cart/cart-selectors";
 
 const CartDropdown = ({ history, cartItems }) => {
 	return (
 		<div
 			id="cartDropdown"
-			className="absolute hidden right-0 mt-1 py-2  bg-white rounded-lg shadow-xl"
+			className="absolute hidden right-0 mt-1 py-2 z-10 bg-white rounded-lg shadow-xl"
 			style={{ width: "18rem", height: "20rem" }}
 		>
 			<div className="mt-4">
@@ -30,8 +31,8 @@ const CartDropdown = ({ history, cartItems }) => {
 	);
 };
 
-const mapStateToProps = ({ cart: { cartItems } }) => ({
-	cartItems,
+const mapStateToProps = (state) => ({
+	cartItems: selectCartItems(state),
 });
 
 export default connect(mapStateToProps)(withRouter(CartDropdown));

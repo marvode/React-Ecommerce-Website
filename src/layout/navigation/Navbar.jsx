@@ -61,7 +61,7 @@ class Navbar extends Component {
 							to="/login"
 						/>
 					) : (
-						<AccountDropdown classes="sm:ml-4" />
+							<AccountDropdown classes="sm:ml-4" user={this.props.currentUser}/>
 					)}
 				</div>
 			</nav>

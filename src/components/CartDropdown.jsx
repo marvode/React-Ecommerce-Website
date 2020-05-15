@@ -14,9 +14,12 @@ const CartDropdown = ({ history, cartItems }) => {
 		>
 			<div className="mt-4">
 				<div className="w-11/12 mx-auto overflow-hidden">
-					{cartItems.map((cartItem) => (
+					{
+						cartItems.length ?
+						(cartItems.map((cartItem) => (
 						<CartItem key={cartItem.id} item={cartItem} />
-					))}
+						))) : (<span className="mx-auto mt-5">Your cart is empty</span>)
+				}
 				</div>
 				<div className="absolute bottom-0 w-full flex justify-center mb-4">
 					<button
@@ -35,4 +38,4 @@ const mapStateToProps = (state) => ({
 	cartItems: selectCartItems(state),
 });
 
-export default connect(mapStateToProps)(withRouter(CartDropdown));
+export default withRouter(connect(mapStateToProps)(CartDropdown));

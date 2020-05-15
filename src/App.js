@@ -6,7 +6,7 @@ import axios from "axios";
 import Homepage from "./pages/homepage";
 import Login from "./pages/login";
 import Shop from "./pages/shop";
-import Checkout from './pages/checkout'
+import Checkout from "./pages/checkout";
 import PageHeader from "./layout/navigation/header";
 
 import { setCurrentUser, setUserToken } from "./redux/user/user-action";
@@ -28,7 +28,10 @@ class App extends Component {
 		if (User.isLoggedIn()) {
 			User.loggedInUser().then((res) => {
 				this.props.setCurrentUser({ user: res });
-				this.props.setUserToken({ access_token: token, refresh_token: AppStorage.getRefreshToken() });
+				this.props.setUserToken({
+					access_token: token,
+					refresh_token: AppStorage.getRefreshToken(),
+				});
 			});
 		}
 	}
@@ -50,7 +53,7 @@ class App extends Component {
 							}
 						></Route>
 						<Route path="/shop" component={Shop}></Route>
-						<Route path="/checkout" component={Checkout}/>
+						<Route path="/checkout" component={Checkout} />
 					</Switch>
 				</div>
 			</div>
@@ -64,7 +67,7 @@ const mapStateToProps = (state) => ({
 
 const matchDispatchToProps = (dispatch) => ({
 	setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-	setUserToken: (token) => dispatch(setUserToken(token))
+	setUserToken: (token) => dispatch(setUserToken(token)),
 });
 
 export default connect(mapStateToProps, matchDispatchToProps)(App);

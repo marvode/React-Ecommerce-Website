@@ -70,9 +70,13 @@ class AccountDropdown extends Component {
 							src={this.state.img}
 							alt=""
 						/>
-						<span className="ml-3 font-semibold text-gray-700">
-							Jane Doe
-						</span>
+						{this.props.user.user.name ? (
+							<span className="ml-3 font-semibold text-gray-700">
+								{this.props.user.user.name}
+							</span>
+						) : (
+							""
+						)}
 					</div>
 					<div className="mt-4">
 						<AccountDropdownItem
@@ -85,7 +89,7 @@ class AccountDropdown extends Component {
 							body="Profile"
 							to="/profile"
 						/>
-						<Logout classes="mt-2 hover:text-gray-600"/>
+						<Logout classes="mt-2 hover:text-gray-600" />
 					</div>
 				</div>
 			</div>

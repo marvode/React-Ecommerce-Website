@@ -10,7 +10,7 @@ const CheckoutComponent = ({ cartItems, total }) => {
 		<div className="w-4/5">
 			<table className="table-fixed">
 				<thead>
-					<tr>
+					<tr className="border-b border-gray-700 p-5">
 						<th className="w-1/5 px-4 py-2">Product</th>
 						<th className="w-1/5 px-4 py-2">Description</th>
 						<th className="w-1/5 px-4 py-2">Quantity</th>
@@ -19,19 +19,17 @@ const CheckoutComponent = ({ cartItems, total }) => {
 					</tr>
 				</thead>
 				<tbody>
-                    {
-                        cartItems.map((cartItem) => {
-                            console.log(cartItem)
-						    return <CheckoutItem key={cartItem.id} {...cartItem}/>}
-					)}
+					{cartItems.map((cartItem) => (
+						<CheckoutItem key={cartItem.id} item={cartItem} />
+					))}
 
-                    <tr>
-                        <td className="w-1/5 px-4 py-2">Total </td>
-                        <td className="w-1/5 px-4 py-2"></td>
-                        <td className="w-1/5 px-4 py-2"></td>
-                        <td className="w-1/5 px-4 py-2"></td>
-                        <td className="w-1/5 px-4 py-2">{total}</td>
-                    </tr>
+					<tr>
+						<td className="w-1/5 px-4 py-2">Total </td>
+						<td className="w-1/5 px-4 py-2"></td>
+						<td className="w-1/5 px-4 py-2"></td>
+						<td className="w-1/5 px-4 py-2">{total}</td>
+						<td className="w-1/5 px-4 py-2"></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

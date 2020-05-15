@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import CartItem from "./CartItem";
 import { selectCartItems } from "../redux/cart/cart-selectors";
 
-const CartDropdown = ({ history, cartItems }) => {
+const CartDropdown = ({ history, cartItems, toggleCart }) => {
 	return (
 		<div
 			id="cartDropdown"
@@ -14,17 +14,21 @@ const CartDropdown = ({ history, cartItems }) => {
 		>
 			<div className="mt-4">
 				<div className="w-11/12 mx-auto overflow-hidden">
-					{
-						cartItems.length ?
-						(cartItems.map((cartItem) => (
-						<CartItem key={cartItem.id} item={cartItem} />
-						))) : (<span className="mx-auto mt-5">Your cart is empty</span>)
-				}
+					{cartItems.length ? (
+						cartItems.map((cartItem) => (
+							<CartItem key={cartItem.id} item={cartItem} />
+						))
+					) : (
+						<span className="mx-auto mt-5">Your cart is empty</span>
+					)}
 				</div>
 				<div className="absolute bottom-0 w-full flex justify-center mb-4">
 					<button
 						className="bg-gray-900 text-gray-200 w-11/12 text-center py-2 rounded"
-						onClick={() => history.push("/checkout")}
+						onClick={() => {
+							history.push("/checkout");
+							toggleCart();
+						}}
 					>
 						CHECKOUT
 					</button>

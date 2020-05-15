@@ -10,6 +10,11 @@ export const removeItem = (item) => ({
 	payload: item,
 });
 
+export const clearItem = (item) => ({
+	type: CartActionTypes.CLEAR_CART_ITEM,
+	payload: item,
+});
+
 export const toggleCart = () => ({
 	type: ToggleCart,
 });

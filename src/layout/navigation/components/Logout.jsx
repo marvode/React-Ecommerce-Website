@@ -1,15 +1,21 @@
 import React from "react";
-import User from "../../../utils/User";
+import { connect } from "react-redux";
 
-const Logout = ({ classes }) => {
+import { logoutUser } from "../../../redux/user/user-action";
+
+const Logout = ({ classes, logoutUser }) => {
 	return (
 		<button
 			className={`block w-full text-left focus:outline-none focus:border-0 ${classes}`}
-			onClick={User.logout}
+			onClick={() => logoutUser()}
 		>
 			Logout
 		</button>
 	);
 };
 
-export default Logout;
+const mapDispatchToProps = (dispatch) => ({
+	logoutUser: () => dispatch(logoutUser()),
+});
+
+export default connect(null, mapDispatchToProps)(Logout);

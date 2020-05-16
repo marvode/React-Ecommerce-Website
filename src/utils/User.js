@@ -1,5 +1,4 @@
 import axios from "axios";
-import AppStorage from "./AppStorage";
 
 export default class User {
 	static async signup(data) {
@@ -24,10 +23,6 @@ export default class User {
 		return response[0];
 	}
 
-	static responseAfterLogin(token_info) {
-		AppStorage.storeAuthInfo(token_info);
-	}
-
 	static async loggedInUser() {
 		let response = [];
 		await axios
@@ -35,18 +30,5 @@ export default class User {
 			.then((res) => response.push(res.data.data))
 			.catch((error) => response.push(error.response.data));
 		return response[0];
-	}
-
-	static isLoggedIn() {
-		const token = AppStorage.getAccessToken()
-		if(token) {
-			return true;
-		};
-		return false;
-	}
-
-	static logout() {
-		AppStorage.clear();
-		window.location = "/";
 	}
 }

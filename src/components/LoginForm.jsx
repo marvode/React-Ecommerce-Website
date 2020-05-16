@@ -6,6 +6,7 @@ import User from "../utils/User";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { setCurrentUser, setUserToken } from "../redux/user/user-action";
+import { setAuthorizationHeader } from "../utils/AppConfig";
 
 class LoginForm extends Component {
 	constructor(props) {
@@ -22,7 +23,7 @@ class LoginForm extends Component {
 		const { username, password } = this.state;
 		User.login({ username, password }).then((res) => {
 			this.setState({ response: res });
-			User.responseAfterLogin(res);
+			setAuthorizationHeader(res.access_token);
 			this.props.setUserToken({
 				access_token: res.access_token,
 				refresh_token: res.refresh_token,

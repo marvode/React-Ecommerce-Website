@@ -10,28 +10,25 @@ import Checkout from "./pages/checkout";
 import PageHeader from "./layout/navigation/header";
 
 import { setCurrentUser, setUserToken } from "./redux/user/user-action";
-import AppStorage from "./utils/AppStorage";
 import User from "./utils/User";
+import { setAuthorizationHeader } from "./utils/AppConfig";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 
-const token = AppStorage.getAccessToken();
-axios.defaults.headers.common = {
-	"X-Requested-With": "XMLHttpRequest",
-	"Content-Type": "application/json",
-	Accept: "application/json",
-	Authorization: `Bearer ${token}`,
-};
+// const token = AppStorage.getAccessToken();
+// axios.defaults.headers.common = {
+// 	"X-Requested-With": "XMLHttpRequest",
+// 	"Content-Type": "application/json",
+// 	Accept: "application/json",
+// 	Authorization: `Bearer ${token}`,
+// };
 
 class App extends Component {
 	componentDidMount() {
-		if (User.isLoggedIn()) {
+		if (this.props.currentUserToken) {
+			setAuthorizationHeader(this.props.currentUserToken.access_token)
 			User.loggedInUser().then((res) => {
 				this.props.setCurrentUser({ user: res });
-				this.props.setUserToken({
-					access_token: token,
-					refresh_token: AppStorage.getRefreshToken(),
-				});
 			});
 		}
 	}
@@ -63,6 +60,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
 	currentUser: state.user.currentUser,
+	currentUserToken: state.user.currentUserToken
 });
 
 const matchDispatchToProps = (dispatch) => ({

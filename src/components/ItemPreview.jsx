@@ -2,9 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { addItem } from "../redux/cart/cart-actions";
+import { withRouter } from "react-router-dom";
 
 const ItemPreview = ({ item, addItem }) => {
-	const { img, name, price } = item
+	const { img, name, price } = item;
+	// console.log(location);
 	return (
 		<div className="shadow overflow-hidden hover:shadow-lg">
 			<div className="bg-white antialiased shadow">
@@ -14,7 +16,10 @@ const ItemPreview = ({ item, addItem }) => {
 						src={img}
 						alt=""
 					/>
-					<button className="absolute w-3/4 p-3 bg-gray-100 bg-opacity-25 hover:bg-black" onClick={()=>addItem(item)}>
+					<button
+						className="absolute w-3/4 p-3 bg-gray-100 bg-opacity-25 hover:bg-black"
+						onClick={() => addItem(item)}
+					>
 						<p className="text-center text-gray-900 hover:text-white">
 							ADD TO CART
 						</p>
@@ -30,7 +35,7 @@ const ItemPreview = ({ item, addItem }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	addItem: item => dispatch(addItem(item))
-})
+	addItem: (item) => dispatch(addItem(item)),
+});
 
-export default connect(null, mapDispatchToProps)(ItemPreview);
+export default withRouter(connect(null, mapDispatchToProps)(ItemPreview));

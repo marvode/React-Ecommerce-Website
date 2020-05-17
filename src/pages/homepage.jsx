@@ -1,14 +1,19 @@
-import React from 'react';
-import Category from '../components/Category';
+import React from "react";
+import { connect } from "react-redux";
 
-import data from '../shopData';
+import Category from "../components/Category";
+import { selectCategorySections } from "../redux/category/category-selectors";
 
-const Homepage = () => {	
+const Homepage = ({ categories }) => {
 	return (
 		<div>
-			<Category data={data}/>
+			<Category data={categories} />
 		</div>
 	);
-}
+};
 
-export default Homepage;
+const mapStateToProps = (state) => ({
+	categories: selectCategorySections(state),
+});
+
+export default connect(mapStateToProps)(Homepage);

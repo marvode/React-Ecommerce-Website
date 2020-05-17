@@ -1,7 +1,8 @@
 import React from "react";
+
 import CategoryItem from "./CategoryItem";
 
-const Category = ({data}) => {
+const Category = ({ data }) => {
 	return (
 		<div>
 			<p className="text-left text-gray-800 text-2xl">Categories</p>

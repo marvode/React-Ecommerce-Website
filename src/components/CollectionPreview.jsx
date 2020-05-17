@@ -1,4 +1,5 @@
 import React from "react";
+
 import ItemPreview from "./ItemPreview";
 
 const CollectionPreview = ({ title, items }) => {
@@ -14,4 +15,4 @@ const CollectionPreview = ({ title, items }) => {
 	);
 };
 
-export default CollectionPreview; 
+export default CollectionPreview;

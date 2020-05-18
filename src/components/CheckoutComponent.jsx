@@ -38,7 +38,7 @@ const CheckoutComponent = ({ cartItems, total }) => {
 				<br />
 				4242 4242 4242 4242 - Exp Date: 05/21 - CVV: 448
 			</div>
-			<div className="flex justify-center my-8">
+			<div className="flex justify-center  my-8">
 				<StripeButton price={total} />
 			</div>
 		</div>

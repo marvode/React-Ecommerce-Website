@@ -50,7 +50,11 @@ class Navbar extends Component {
 						</button>
 					</div>
 				</div>
-				<div className="hidden sm:flex px-5 pb-2 sm:pb-0" id="menu" onClick={this.toggleMenu}>
+				<div
+					className="hidden sm:flex px-5 pb-2 sm:pb-0"
+					id="menu"
+					onClick={this.toggleMenu}
+				>
 					<Item classes="px-2" body="Shop" to="/shop" />
 					<Item classes="px-2 mt-1" body="Contact Us" to="/contact" />
 					<Cart />
@@ -61,7 +65,10 @@ class Navbar extends Component {
 							to="/login"
 						/>
 					) : (
-							<AccountDropdown classes="sm:ml-4" user={this.props.currentUser}/>
+						<AccountDropdown
+							classes="sm:ml-4"
+							user={this.props.currentUser.user}
+						/>
 					)}
 				</div>
 			</nav>

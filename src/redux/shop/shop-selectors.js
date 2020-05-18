@@ -27,11 +27,11 @@ export const selectCollection = (collectionUrlParam) => {
 	);
 };
 
-export const mapCollectionNameToId = (collectionName) => {
-	const modifiedName = collectionName.replace(" ", "_");
-	return createSelector([selectCollections], (collections) =>
-		collections.find(
-			(collection) => collection.id === COLLECTION_ID_MAP[modifiedName]
-		)
-	);
-};
+// export const mapCollectionNameToId = (collectionName) => {
+// 	const modifiedName = collectionName.replace(" ", "_");
+// 	return createSelector([selectCollections], (collections) =>
+// 		collections.find(
+// 			(collection) => collection.id === COLLECTION_ID_MAP[modifiedName]
+// 		)
+// 	);
+// };

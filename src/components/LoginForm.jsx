@@ -14,7 +14,7 @@ class LoginForm extends Component {
 		this.state = {
 			username: null,
 			password: null,
-			response: {},
+			error: null,
 		};
 	}
 
@@ -22,22 +22,21 @@ class LoginForm extends Component {
 		e.preventDefault();
 		const { username, password } = this.state;
 		User.login({ username, password }).then((res) => {
-			this.setState({ response: res });
-			setAuthorizationHeader(res.access_token);
-			this.props.setUserToken({
-				access_token: res.access_token,
-				refresh_token: res.refresh_token,
-			});
-			// User.loggedInUser().then(
-			// 	res => {
-			// 		this.props.setCurrentUser({ ...res });
-			// 	}
-			// )
-			// console.log(res)
-			// this.props.history.push("/");
-
-			//temp solution
-			window.location = "/";
+			//console.log(res);
+			if (res["data"]) {
+				setAuthorizationHeader(res["data"]["access_token"]);
+				this.props.setUserToken({
+					access_token: res["data"]["access_token"],
+					refresh_token: res["data"]["refresh_token"],
+				});
+				// TODO: change user location after setting current user
+				User.loggedInUser().then((res) => {
+					this.props.setCurrentUser({ ...res });
+				});
+				this.props.history.push("/");
+			} else {
+				this.setState({ error: "Email or password is not correct" });
+			}
 		});
 	};
 
@@ -53,6 +52,13 @@ class LoginForm extends Component {
 			>
 				<p className="pb-4 text-xl">Login</p>
 				<form onSubmit={this.handleSubmit}>
+					{this.state.error ? (
+						<p className="mb-2 text-sm italic text-red-600">
+							{this.state.response}
+						</p>
+					) : (
+						""
+					)}
 					<Input
 						name="username"
 						placeholder="Email"

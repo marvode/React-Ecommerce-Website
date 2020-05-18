@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import AccountDropdownItem from "./AccountDropdownItem";
 import Logout from "./Logout";
 
@@ -70,9 +71,9 @@ class AccountDropdown extends Component {
 							src={this.state.img}
 							alt=""
 						/>
-						{this.props.user.user.name ? (
+						{this.props.user ? (
 							<span className="ml-3 font-semibold text-gray-700">
-								{this.props.user.user.name}
+								{this.props.user.name}
 							</span>
 						) : (
 							""

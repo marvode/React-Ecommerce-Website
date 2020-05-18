@@ -15,12 +15,12 @@ export default class User {
 		await axios
 			.post("oauth/token", data)
 			.then((res) => {
-				response.push(res.data);
-				// console.log(res.data);
-				// this.responseAfterLogin(res.data);
+				return (response["data"] = res.data);
 			})
-			.catch((error) => response.push(error));
-		return response[0];
+			.catch((error) => {
+				return (response["error"] = error.response.data);
+			});
+		return response;
 	}
 
 	static async loggedInUser() {

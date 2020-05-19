@@ -15,14 +15,6 @@ import { setAuthorizationHeader } from "./utils/AppConfig";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 
-// const token = AppStorage.getAccessToken();
-// axios.defaults.headers.common = {
-// 	"X-Requested-With": "XMLHttpRequest",
-// 	"Content-Type": "application/json",
-// 	Accept: "application/json",
-// 	Authorization: `Bearer ${token}`,
-// };
-
 class App extends Component {
 	componentDidMount() {
 		if (this.props.currentUserToken) {
@@ -38,7 +30,7 @@ class App extends Component {
 				<PageHeader />
 				<div className="py-8 px-6 sm:px-12">
 					<Switch>
-						<Route exact path="/" component={Homepage}></Route>
+						<Route exact path="/" component={Homepage} />
 						<Route
 							path="/login"
 							render={() =>

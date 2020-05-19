@@ -17,7 +17,6 @@ class Collection extends Component {
 	}
 
 	render() {
-		console.log(this.props.collection);
 		return (
 			<div>
 				<div className="mb-4">

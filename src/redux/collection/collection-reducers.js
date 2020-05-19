@@ -1,6 +1,10 @@
 import CollectionTypes from "./collection-types";
 
-const collectionReducer = (state = null, action) => {
+const INITIAL_STATE = {
+	collection: [],
+};
+
+const collectionReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case CollectionTypes.ADD_COLLECTION:
 			return {

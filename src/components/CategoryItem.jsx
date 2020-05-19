@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 class CategoryItem extends Component {
 	render() {
 		const { img, name, history } = this.props;
-		console.log(this.props);
 		return (
 			<div
 				className="bg-white overflow-hidden antialiased shadow cursor-pointer"

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { addCollection } from "../redux/collection/collection-actions.js";
-import ItemPreview from "./ItemPreview.jsx";
+import { addCollection } from "../redux/collection/collection-actions";
+import ItemPreview from "./ItemPreview";
+import { selectCollections } from "../redux/collection/collection-selectors";
 
 class Collection extends Component {
 	componentDidMount() {
@@ -16,6 +17,7 @@ class Collection extends Component {
 	}
 
 	render() {
+		console.log(this.props.collection);
 		return (
 			<div>
 				<div className="mb-4">
@@ -37,7 +39,7 @@ const mapStateToProps = (state, ownProps) => ({
 	category: state.categories.categories.filter(
 		(category) => category.name === ownProps.match.params.categoryId
 	)[0],
-	collection: state.collection.collection,
+	collection: selectCollections(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

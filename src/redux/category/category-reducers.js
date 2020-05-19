@@ -1,3 +1,5 @@
+import CategoryTypes from "./category-types";
+
 const INITIAL_STATE = {
 	sections: [
 		{
@@ -53,6 +55,11 @@ const INITIAL_STATE = {
 
 export const categoryReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case CategoryTypes.ADD_CATEGORIES:
+			return {
+				...state,
+				categories: action.payload,
+			};
 		default:
 			return state;
 	}

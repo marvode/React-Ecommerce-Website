@@ -1,19 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Category from "../components/Category";
-import { selectCategorySections } from "../redux/category/category-selectors";
+import { selectCategories } from "../redux/category/category-selectors";
+import { addCategories } from "../redux/category/category-actions";
+import axios from "axios";
 
-const Homepage = ({ categories }) => {
-	return (
-		<div>
-			<Category data={categories} />
-		</div>
-	);
-};
+class Homepage extends Component {
+	componentDidMount() {
+		axios
+			.get("/categories?per_page=8")
+			.then((res) => this.props.addCategories(res.data.data));
+	}
+
+	render() {
+		console.log(this.props.categories);
+		return (
+			<div>
+				<Category data={this.props.categories} />
+			</div>
+		);
+	}
+}
 
 const mapStateToProps = (state) => ({
-	categories: selectCategorySections(state),
+	categories: selectCategories(state),
 });
 
-export default connect(mapStateToProps)(Homepage);
+const mapDispatchToProps = (dispatch) => ({
+	addCategories: (categories) => dispatch(addCategories(categories)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

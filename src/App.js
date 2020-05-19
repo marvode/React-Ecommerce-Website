@@ -5,8 +5,8 @@ import axios from "axios";
 
 import Homepage from "./pages/homepage";
 import Login from "./pages/login";
-import Shop from "./pages/shop";
 import Checkout from "./pages/checkout";
+import CategoryPage from "./pages/category";
 import PageHeader from "./layout/navigation/header";
 
 import { setCurrentUser, setUserToken } from "./redux/user/user-action";
@@ -26,7 +26,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8000";
 class App extends Component {
 	componentDidMount() {
 		if (this.props.currentUserToken) {
-			setAuthorizationHeader(this.props.currentUserToken.access_token)
+			setAuthorizationHeader(this.props.currentUserToken.access_token);
 			User.loggedInUser().then((res) => {
 				this.props.setCurrentUser({ user: res });
 			});
@@ -49,7 +49,10 @@ class App extends Component {
 								)
 							}
 						></Route>
-						<Route path="/shop" component={Shop}></Route>
+						<Route
+							path="/categories"
+							component={CategoryPage}
+						></Route>
 						<Route path="/checkout" component={Checkout} />
 					</Switch>
 				</div>
@@ -60,7 +63,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
 	currentUser: state.user.currentUser,
-	currentUserToken: state.user.currentUserToken
+	currentUserToken: state.user.currentUserToken,
 });
 
 const matchDispatchToProps = (dispatch) => ({

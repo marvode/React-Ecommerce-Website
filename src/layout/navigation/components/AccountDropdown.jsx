@@ -8,7 +8,7 @@ class AccountDropdown extends Component {
 		super(props);
 		this.state = {
 			isAccountOpen: false,
-			img: "./img/7.jpg",
+			img: "http://localhost:3000/img/7.jpg",
 		};
 	}
 

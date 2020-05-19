@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom";
 
 const ItemPreview = ({ item, addItem }) => {
 	const { img, name, price } = item;
-	// console.log(location);
 	return (
 		<div className="shadow overflow-hidden hover:shadow-lg">
 			<div className="bg-white antialiased shadow">

@@ -55,7 +55,6 @@ class Navbar extends Component {
 					id="menu"
 					onClick={this.toggleMenu}
 				>
-					<Item classes="px-2" body="Shop" to="/shop" />
 					<Item classes="px-2 mt-1" body="Contact Us" to="/contact" />
 					<Cart />
 					{!this.props.currentUser ? (

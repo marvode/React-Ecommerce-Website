@@ -1,21 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-import Category from "../components/Category";
-import { addCategories } from "../redux/category/category-actions";
 import axios from "axios";
 
+import Category from "../components/Category";
+
+import WithSpinner from "../components/SpinnerHOC";
+
+import { addCategories } from "../redux/category/category-actions";
+
+const CategoryWithSpinner = WithSpinner(Category);
+
 class Homepage extends Component {
+	state = {
+		loading: true,
+	};
+
 	componentDidMount() {
-		axios
-			.get("/categories?per_page=8")
-			.then((res) => this.props.addCategories(res.data.data));
+		axios.get("/categories?per_page=8").then((res) => {
+			this.props.addCategories(res.data.data);
+			this.setState({ loading: false });
+		});
 	}
 
 	render() {
 		return (
 			<div>
-				<Category />
+				<CategoryWithSpinner isLoading={this.state.loading} />
 			</div>
 		);
 	}

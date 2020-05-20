@@ -33,7 +33,7 @@ class LoginForm extends Component {
 				User.loggedInUser().then((res) => {
 					this.props.setCurrentUser({ ...res });
 				});
-				this.props.history.push("/");
+				window.location = "/";
 			} else {
 				this.setState({ error: "Email or password is not correct" });
 			}
@@ -54,7 +54,7 @@ class LoginForm extends Component {
 				<form onSubmit={this.handleSubmit}>
 					{this.state.error ? (
 						<p className="mb-2 text-sm italic text-red-600">
-							{this.state.response}
+							{this.state.error}
 						</p>
 					) : (
 						""
@@ -91,4 +91,4 @@ const matchDispatchToProps = (dispatch) => ({
 	setUserToken: (token) => dispatch(setUserToken(token)),
 });
 
-export default connect(null, matchDispatchToProps)(withRouter(LoginForm));
+export default withRouter(connect(null, matchDispatchToProps)(LoginForm));

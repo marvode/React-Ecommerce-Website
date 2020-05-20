@@ -6,6 +6,8 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import "./index.css";
 import "./css/tailwind.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 import { store, persistor } from "./redux/store";
 import App from "./App";
 

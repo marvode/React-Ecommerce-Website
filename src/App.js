@@ -12,6 +12,7 @@ import PageHeader from "./layout/navigation/header";
 import { setCurrentUser, setUserToken } from "./redux/user/user-action";
 import User from "./utils/User";
 import { setAuthorizationHeader } from "./utils/AppConfig";
+import { selectCurrentUser } from "./redux/user/user-selectors";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 
@@ -54,7 +55,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	currentUser: state.user.currentUser,
+	currentUser: selectCurrentUser(state),
 	currentUserToken: state.user.currentUserToken,
 });
 

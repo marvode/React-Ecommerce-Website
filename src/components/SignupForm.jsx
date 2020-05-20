@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+
 import Input from "../components/Input";
-import Button from "../components/Button";
-import User from "../utils/User"
+import LoginButton from "../components/LoginButton";
+import User from "../utils/User";
 
 class SignupForm extends Component {
 	constructor(props) {
@@ -11,17 +12,19 @@ class SignupForm extends Component {
 			email: null,
 			password: null,
 			password_confirmation: null,
-			response : {}
+			response: {},
 		};
 	}
 
 	handleSignupForm = (e) => {
 		e.preventDefault();
 		const { name, email, password, password_confirmation } = this.state;
-		User.signup({ name, email, password, password_confirmation }).then(res => {
-			this.setState({ response: res })
-			console.log(this.state)
-		})
+		User.signup({ name, email, password, password_confirmation }).then(
+			(res) => {
+				this.setState({ response: res });
+				console.log(this.state);
+			}
+		);
 	};
 
 	handleChange = (e) => {
@@ -68,7 +71,7 @@ class SignupForm extends Component {
 						label="Confirm Password"
 						required
 					/>
-					<Button
+					<LoginButton
 						value="Sign Up"
 						classes="bg-gray-700 text-white"
 						type="submit"

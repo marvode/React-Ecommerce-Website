@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import User from "../utils/User";
 import Input from "../components/Input";
-import Button from "../components/Button";
+import LoginButton from "../components/LoginButton";
 import { setCurrentUser, setUserToken } from "../redux/user/user-action";
 import { setAuthorizationHeader } from "../utils/AppConfig";
 
@@ -15,11 +15,13 @@ class LoginForm extends Component {
 			username: null,
 			password: null,
 			error: null,
+			isLoading: false,
 		};
 	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
+		this.setState({ isLoading: true });
 		const { username, password } = this.state;
 		User.login({ username, password }).then((res) => {
 			//console.log(res);
@@ -33,16 +35,20 @@ class LoginForm extends Component {
 				User.loggedInUser().then((res) => {
 					this.props.setCurrentUser({ ...res });
 				});
+				this.setState({ isLoading: false });
 				window.location = "/";
 			} else {
-				this.setState({ error: "Email or password is not correct" });
+				this.setState({
+					error: "Email or password is not correct",
+					isLoading: false,
+				});
 			}
 		});
 	};
 
 	handleChange = (e) => {
 		const { name, value } = e.target;
-		this.setState({ [name]: value });
+		this.setState({ [name]: value, error: null });
 	};
 
 	render() {
@@ -75,7 +81,8 @@ class LoginForm extends Component {
 						label="Password"
 						required
 					/>
-					<Button
+					<LoginButton
+						isLoading={this.state.isLoading}
 						value="Login"
 						classes="bg-gray-700 text-white"
 						type="submit"

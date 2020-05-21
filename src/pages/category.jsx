@@ -1,13 +1,16 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 import Collection from "../components/Collection";
-import Category from "../components/Category";
 
 const CategoryPage = ({ match }) => {
 	return (
 		<div>
-			<Route exact path={`${match.path}`} component={Category} />
+			<Route
+				exact
+				path={`${match.path}`}
+				render={() => <Redirect to="/" />}
+			/>
 			<Route
 				exact
 				path={`${match.path}/:categoryId`}

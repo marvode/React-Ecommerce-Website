@@ -1,33 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
-import { addCollection } from "../redux/collection/collection-actions";
+import { fetchCollectionStartAsync } from "../redux/collection/collection-actions";
 import WithSpinner from "./SpinnerHOC";
-import { selectCollections } from "../redux/collection/collection-selectors";
+import {
+	selectCollections,
+	selectIsCollectionFetching,
+	selectIsCollectionLoaded,
+} from "../redux/collection/collection-selectors";
 import CollectionOverview from "./CollectionOverview";
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
 
 class Collection extends Component {
-	state = {
-		isLoading: true,
-	};
-
 	componentDidMount() {
-		axios
-			.get(`/categories/${this.props.category.id}/products`)
-			.then((res) => {
-				this.props.addCollection(res.data.data);
-				this.setState({ isLoading: false });
-			})
-			.catch((error) => console.log(error));
+		this.props.fetchCollection(this.props.category.id);
 	}
 
 	render() {
 		return (
 			<CollectionOverviewWithSpinner
-				isLoading={this.state.isLoading}
+				isLoading={!this.props.isLoaded}
 				name={this.props.category.name}
 				collection={this.props.collection}
 			/>
@@ -40,10 +33,13 @@ const mapStateToProps = (state, ownProps) => ({
 		(category) => category.name === ownProps.match.params.categoryId
 	)[0],
 	collection: selectCollections(state),
+	isFetching: selectIsCollectionFetching(state),
+	isLoaded: selectIsCollectionLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addCollection: (collection) => dispatch(addCollection(collection)),
+	fetchCollection: (categoryId) =>
+		dispatch(fetchCollectionStartAsync(categoryId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Collection);

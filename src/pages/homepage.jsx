@@ -16,7 +16,7 @@ class Homepage extends Component {
 	};
 
 	componentDidMount() {
-		axios.get("/categories?per_page=8").then((res) => {
+		axios.get("/categories").then((res) => {
 			this.props.addCategories(res.data.data);
 			this.setState({ loading: false });
 		});

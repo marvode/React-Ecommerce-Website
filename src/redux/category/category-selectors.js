@@ -9,5 +9,15 @@ const selectCategory = (state) => state.categories;
 
 export const selectCategories = createSelector(
 	[selectCategory],
-	(category) => category.categories
+	(categories) => categories.categories
 );
+
+export const selectCategoryId = (categoryName) => {
+	return createSelector(
+		[selectCategory],
+		(categories) =>
+			categories.categories.filter(
+				(category) => category.name === categoryName
+			)[0].id
+	);
+};

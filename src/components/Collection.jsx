@@ -8,20 +8,21 @@ import {
 	selectIsCollectionFetching,
 	selectIsCollectionLoaded,
 } from "../redux/collection/collection-selectors";
+import { selectCategoryId } from "../redux/category/category-selectors";
 import CollectionOverview from "./CollectionOverview";
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
 
 class Collection extends Component {
 	componentDidMount() {
-		this.props.fetchCollection(this.props.category.id);
+		this.props.fetchCollection(this.props.categoryId);
 	}
 
 	render() {
 		return (
 			<CollectionOverviewWithSpinner
 				isLoading={!this.props.isLoaded}
-				name={this.props.category.name}
+				name={this.props.match.params.categoryId}
 				collection={this.props.collection}
 			/>
 		);
@@ -29,9 +30,7 @@ class Collection extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	category: state.categories.categories.filter(
-		(category) => category.name === ownProps.match.params.categoryId
-	)[0],
+	categoryId: selectCategoryId(ownProps.match.params.categoryId)(state),
 	collection: selectCollections(state),
 	isFetching: selectIsCollectionFetching(state),
 	isLoaded: selectIsCollectionLoaded(state),

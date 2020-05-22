@@ -25,11 +25,6 @@ export const categoryReducer = (state = INITIAL_STATE, action) => {
 				errorMessage: action.payload,
 				isFetchingCategory: false,
 			};
-		// case CategoryTypes.ADD_CATEGORIES:
-		// 	return {
-		// 		...state,
-		// 		categories: action.payload,
-		// 	};
 		default:
 			return state;
 	}

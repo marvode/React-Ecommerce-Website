@@ -5,11 +5,7 @@ import Category from "../components/Category";
 
 import WithSpinner from "../components/SpinnerHOC";
 
-import {
-	addCategories,
-	fetchCategoriesAsync,
-	fetchCategoriesSuccess,
-} from "../redux/category/category-actions";
+import { fetchCategoriesAsync } from "../redux/category/category-actions";
 import { selectIsCategoryLoaded } from "../redux/category/category-selectors";
 
 const CategoryWithSpinner = WithSpinner(Category);
@@ -33,10 +29,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addCategories: (categories) => dispatch(addCategories(categories)),
 	fetchCategories: () => dispatch(fetchCategoriesAsync()),
-	updateCategories: (categories) =>
-		dispatch(fetchCategoriesSuccess(categories)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

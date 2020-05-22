@@ -1,38 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import Category from "../components/Category";
 
 import WithSpinner from "../components/SpinnerHOC";
 
-import { addCategories } from "../redux/category/category-actions";
+import {
+	addCategories,
+	fetchCategoriesAsync,
+	fetchCategoriesSuccess,
+} from "../redux/category/category-actions";
+import { selectIsCategoryLoaded } from "../redux/category/category-selectors";
 
 const CategoryWithSpinner = WithSpinner(Category);
 
 class Homepage extends Component {
-	state = {
-		loading: true,
-	};
-
 	componentDidMount() {
-		axios.get("/categories").then((res) => {
-			this.props.addCategories(res.data.data);
-			this.setState({ loading: false });
-		});
+		this.props.fetchCategories();
 	}
 
 	render() {
 		return (
 			<div>
-				<CategoryWithSpinner isLoading={this.state.loading} />
+				<CategoryWithSpinner isLoading={!this.props.isLoaded} />
 			</div>
 		);
 	}
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	addCategories: (categories) => dispatch(addCategories(categories)),
+const mapStateToProps = (state) => ({
+	isLoaded: selectIsCategoryLoaded(state),
 });
 
-export default connect(null, mapDispatchToProps)(Homepage);
+const mapDispatchToProps = (dispatch) => ({
+	addCategories: (categories) => dispatch(addCategories(categories)),
+	fetchCategories: () => dispatch(fetchCategoriesAsync()),
+	updateCategories: (categories) =>
+		dispatch(fetchCategoriesSuccess(categories)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

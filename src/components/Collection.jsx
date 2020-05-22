@@ -5,7 +5,6 @@ import { fetchCollectionStartAsync } from "../redux/collection/collection-action
 import WithSpinner from "./SpinnerHOC";
 import {
 	selectCollections,
-	selectIsCollectionFetching,
 	selectIsCollectionLoaded,
 } from "../redux/collection/collection-selectors";
 import { selectCategoryId } from "../redux/category/category-selectors";
@@ -32,7 +31,6 @@ class Collection extends Component {
 const mapStateToProps = (state, ownProps) => ({
 	categoryId: selectCategoryId(ownProps.match.params.categoryId)(state),
 	collection: selectCollections(state),
-	isFetching: selectIsCollectionFetching(state),
 	isLoaded: selectIsCollectionLoaded(state),
 });
 

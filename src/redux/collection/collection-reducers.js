@@ -25,11 +25,6 @@ const collectionReducer = (state = INITIAL_STATE, action) => {
 				errorMessage: action.payload,
 				isFetchingCollection: false,
 			};
-		case CollectionTypes.ADD_COLLECTION:
-			return {
-				...state,
-				collection: action.payload,
-			};
 		default:
 			return state;
 	}

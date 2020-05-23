@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 
 import CategoryContainer from "../containers/category.container";
 
-import { fetchCategoriesAsync } from "../redux/category/category-actions";
+import { fetchCategoriesStart } from "../redux/category/category-actions";
 
 class Homepage extends Component {
 	componentDidMount() {
-		this.props.fetchCategories();
+		this.props.fetchCategoriesStart();
 	}
 
 	render() {
@@ -16,7 +16,7 @@ class Homepage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchCategories: () => dispatch(fetchCategoriesAsync()),
+	fetchCategoriesStart: () => dispatch(fetchCategoriesStart()),
 });
 
 export default connect(null, mapDispatchToProps)(Homepage);

@@ -5,6 +5,7 @@ import CategoryItem from "./CategoryItem";
 import { selectCategories } from "../redux/category/category-selectors";
 
 const Category = ({ categories }) => {
+	console.log(categories);
 	return (
 		<div>
 			<p className="text-left text-gray-800 text-2xl">Categories</p>

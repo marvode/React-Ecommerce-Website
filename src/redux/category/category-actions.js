@@ -2,7 +2,7 @@ import axios from "axios";
 
 import CategoryTypes from "./category-types";
 
-const fetchCategoriesStart = () => ({
+export const fetchCategoriesStart = () => ({
 	type: CategoryTypes.FETCH_CATEGORIES_START,
 });
 
@@ -11,7 +11,7 @@ export const fetchCategoriesSuccess = (categories) => ({
 	payload: categories,
 });
 
-const fetchCategoriesFailure = (errorMessage) => ({
+export const fetchCategoriesFailure = (errorMessage) => ({
 	type: CategoryTypes.FETCH_CATEGORIES_FAILURE,
 	payload: errorMessage,
 });

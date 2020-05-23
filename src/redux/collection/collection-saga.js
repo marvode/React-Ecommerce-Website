@@ -8,7 +8,6 @@ import {
 } from "./collection-actions";
 
 function* fetchCollectionAsync({ categoryId }) {
-	console.log(categoryId);
 	try {
 		const response = yield axios.get(`/categories/${categoryId}/products`);
 		yield put(fetchCollectionSuccess(response.data.data));

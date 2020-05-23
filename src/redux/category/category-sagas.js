@@ -14,7 +14,6 @@ export function* fetchCategoriesAsync() {
 	} catch (error) {
 		yield put(fetchCategoriesFailure(error));
 	}
-	yield console.log("i am fired");
 }
 
 export default function* fetchCategoriesStart() {

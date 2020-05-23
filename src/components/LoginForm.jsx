@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import User from "../utils/User";
 import Input from "../components/Input";
 import LoginButton from "../components/LoginButton";
-import { setCurrentUser, setUserToken } from "../redux/user/user-action";
-import { setAuthorizationHeader } from "../utils/AppConfig";
+
+import { loginStart } from "../redux/user/user-action";
 
 class LoginForm extends Component {
 	constructor(props) {
@@ -14,41 +13,23 @@ class LoginForm extends Component {
 		this.state = {
 			username: null,
 			password: null,
-			error: null,
-			isLoading: false,
+			error: false,
 		};
 	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.setState({ isLoading: true });
 		const { username, password } = this.state;
-		User.login({ username, password }).then((res) => {
-			//console.log(res);
-			if (res["data"]) {
-				setAuthorizationHeader(res["data"]["access_token"]);
-				this.props.setUserToken({
-					access_token: res["data"]["access_token"],
-					refresh_token: res["data"]["refresh_token"],
-				});
-				// TODO: change user location after setting current user
-				User.loggedInUser().then((res) => {
-					this.props.setCurrentUser({ ...res });
-				});
-				this.setState({ isLoading: false });
-				window.location = "/";
-			} else {
-				this.setState({
-					error: "Email or password is not correct",
-					isLoading: false,
-				});
-			}
-		});
+
+		this.props.login({ username, password });
+		this.props.loginErrors
+			? this.setState({ error: true })
+			: this.setState({ error: false });
 	};
 
 	handleChange = (e) => {
 		const { name, value } = e.target;
-		this.setState({ [name]: value, error: null });
+		this.setState({ [name]: value, error: false });
 	};
 
 	render() {
@@ -60,7 +41,7 @@ class LoginForm extends Component {
 				<form onSubmit={this.handleSubmit}>
 					{this.state.error ? (
 						<p className="mb-2 text-sm italic text-red-600">
-							{this.state.error}
+							email or password not correct
 						</p>
 					) : (
 						""
@@ -82,7 +63,7 @@ class LoginForm extends Component {
 						required
 					/>
 					<LoginButton
-						isLoading={this.state.isLoading}
+						isLoading={this.props.loggingIn}
 						value="Login"
 						classes="bg-gray-700 text-white"
 						type="submit"
@@ -93,9 +74,15 @@ class LoginForm extends Component {
 	}
 }
 
-const matchDispatchToProps = (dispatch) => ({
-	setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-	setUserToken: (token) => dispatch(setUserToken(token)),
+const mapStateToProps = (state) => ({
+	loginErrors: state.user.error,
+	loggingIn: state.user.loggingIn,
 });
 
-export default withRouter(connect(null, matchDispatchToProps)(LoginForm));
+const matchDispatchToProps = (dispatch) => ({
+	login: (loginInfo) => dispatch(loginStart(loginInfo)),
+});
+
+export default withRouter(
+	connect(mapStateToProps, matchDispatchToProps)(LoginForm)
+);

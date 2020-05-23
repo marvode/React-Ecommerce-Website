@@ -2,16 +2,17 @@ import axios from "axios";
 
 import CollectionTypes from "./collection-types";
 
-const fetchCollectionStart = () => ({
+export const fetchCollectionStart = (categoryId) => ({
 	type: CollectionTypes.FETCH_COLLECTION_START,
+	categoryId,
 });
 
-const fetchCollectionSuccess = (collection) => ({
+export const fetchCollectionSuccess = (collection) => ({
 	type: CollectionTypes.FETCH_COLLECTION_SUCCESS,
 	payload: collection,
 });
 
-const fetchCollectionFailure = (error) => ({
+export const fetchCollectionFailure = (error) => ({
 	type: CollectionTypes.FETCH_COLLECTION_FAILURE,
 	payload: error,
 });

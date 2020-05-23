@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchCollectionStartAsync } from "../redux/collection/collection-actions";
+import { fetchCollectionStart } from "../redux/collection/collection-actions";
 import CollectionContainer from "../containers/collection.container";
 import { selectCategoryId } from "../redux/category/category-selectors";
 
@@ -20,8 +20,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchCollection: (categoryId) =>
-		dispatch(fetchCollectionStartAsync(categoryId)),
+	fetchCollection: (categoryId) => dispatch(fetchCollectionStart(categoryId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Collection);

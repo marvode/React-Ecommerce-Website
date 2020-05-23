@@ -1,5 +1,5 @@
 import axios from "axios";
-import { takeEvery, put } from "redux-saga/effects";
+import { takeLatest, put } from "redux-saga/effects";
 
 import CategoryTypes from "./category-types";
 import {
@@ -17,6 +17,9 @@ export function* fetchCategoriesAsync() {
 	yield console.log("i am fired");
 }
 
-export function* fetchCategoriesStart() {
-	yield takeEvery(CategoryTypes.FETCH_CATEGORIES_START, fetchCategoriesAsync);
+export default function* fetchCategoriesStart() {
+	yield takeLatest(
+		CategoryTypes.FETCH_CATEGORIES_START,
+		fetchCategoriesAsync
+	);
 }

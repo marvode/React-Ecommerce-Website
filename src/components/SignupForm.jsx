@@ -1,113 +1,108 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import Input from "../components/Input";
 import LoginButton from "../components/LoginButton";
 import { signUpStart } from "../redux/user/user-action";
 
-class SignupForm extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: null,
-			email: null,
-			password: null,
-			password_confirmation: null,
-			error: null,
-		};
-	}
+const SignupForm = (props) => {
+	const [userInfo, setUserInfo] = useState({
+		name: "",
+		email: "",
+		password: "",
+		password_confirmation: "",
+		error: null,
+	});
 
-	handleSignupForm = (e) => {
+	const handleSignupForm = (e) => {
 		e.preventDefault();
-		const { name, email, password, password_confirmation } = this.state;
-		this.props.signup({
+		const { name, email, password, password_confirmation } = userInfo;
+		props.signup({
 			name,
 			email,
 			password,
 			password_confirmation,
 		});
-		this.props.signUpErrors
-			? this.setState({ error: this.props.signUpErrors })
-			: this.setState({ error: null });
+		props.signUpErrors
+			? setUserInfo({ ...userInfo, error: props.signUpErrors })
+			: setUserInfo({ ...userInfo, error: null });
 	};
 
-	handleChange = (e) => {
+	const handleChange = (e) => {
 		const { name, value } = e.target;
-		this.setState({ [name]: value });
+		setUserInfo({ ...userInfo, [name]: value });
 	};
 
-	render() {
-		return (
-			<div
-				className={`bg-white shadow-md rounded px-8 py-6 ${this.props.classes}`}
-			>
-				<p className="pb-4 text-xl">Create A New Account</p>
-				<form onSubmit={this.handleSignupForm}>
-					<Input
-						name="name"
-						placeholder="Name"
-						type="text"
-						handleChange={this.handleChange}
-						label="Name"
-						required
-					/>
-					{this.state.error && this.state.error.email ? (
-						<div>
-							{this.state.error.email.map((error) => (
-								<p className="mb-2 text-sm italic text-red-600">
-									{error}
-								</p>
-							))}
-						</div>
-					) : (
-						""
-					)}
-					<Input
-						name="email"
-						placeholder="Email"
-						type="email"
-						handleChange={this.handleChange}
-						label="Email"
-						required
-					/>
-					{this.state.error && this.state.error.password ? (
-						<div>
-							{this.state.error.password.map((error) => (
-								<p className="mb-2 text-sm italic text-red-600">
-									{error}
-								</p>
-							))}
-						</div>
-					) : (
-						""
-					)}
-					<Input
-						name="password"
-						placeholder="Password"
-						type="password"
-						handleChange={this.handleChange}
-						label="Password"
-						required
-					/>
-					<Input
-						name="password_confirmation"
-						placeholder="Confirm Password"
-						type="password"
-						handleChange={this.handleChange}
-						label="Confirm Password"
-						required
-					/>
-					<LoginButton
-						isLoading={this.props.signingUp}
-						value="Sign Up"
-						classes="bg-gray-700 text-white"
-						type="submit"
-					/>
-				</form>
-			</div>
-		);
-	}
-}
+	return (
+		<div
+			className={`bg-white shadow-md rounded px-8 py-6 ${props.classes}`}
+		>
+			<p className="pb-4 text-xl">Create A New Account</p>
+			<form onSubmit={handleSignupForm}>
+				<Input
+					name="name"
+					placeholder="Name"
+					type="text"
+					handleChange={handleChange}
+					label="Name"
+					required
+				/>
+				{userInfo.error && userInfo.error.email ? (
+					<div>
+						{userInfo.error.email.map((error) => (
+							<p className="mb-2 text-sm italic text-red-600">
+								{error}
+							</p>
+						))}
+					</div>
+				) : (
+					""
+				)}
+				<Input
+					name="email"
+					placeholder="Email"
+					type="email"
+					handleChange={handleChange}
+					label="Email"
+					required
+				/>
+				{userInfo.error && userInfo.error.password ? (
+					<div>
+						{userInfo.error.password.map((error) => (
+							<p className="mb-2 text-sm italic text-red-600">
+								{error}
+							</p>
+						))}
+					</div>
+				) : (
+					""
+				)}
+				<Input
+					name="password"
+					placeholder="Password"
+					type="password"
+					handleChange={handleChange}
+					label="Password"
+					required
+				/>
+				<Input
+					name="password_confirmation"
+					placeholder="Confirm Password"
+					type="password"
+					handleChange={handleChange}
+					label="Confirm Password"
+					required
+				/>
+				<LoginButton
+					isLoading={props.signingUp}
+					value="Sign Up"
+					classes="bg-gray-700 text-white"
+					type="submit"
+				/>
+			</form>
+		</div>
+	);
+};
 
 const mapStateToProps = (state) => ({
 	isSigningUp: state.user.signingUp,

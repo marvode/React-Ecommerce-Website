@@ -27,3 +27,17 @@ export const loginFailure = (error) => ({
 	type: UserTypes.LOGIN_FAILURE,
 	payload: error,
 });
+
+export const signUpStart = (userSignUpInfo) => ({
+	type: UserTypes.SIGNUP_START,
+	payload: userSignUpInfo,
+});
+
+export const signUpSuccess = () => ({
+	type: UserTypes.SIGNUP_SUCCESS,
+});
+
+export const signUpFailure = (error) => ({
+	type: UserTypes.SIGNUP_FAILURE,
+	payload: error,
+});

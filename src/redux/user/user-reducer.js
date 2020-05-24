@@ -4,7 +4,9 @@ const INITIAL_STATE = {
 	currentUser: null,
 	currentUserToken: null,
 	loggingIn: false,
-	error: null,
+	signingUp: false,
+	loginError: null,
+	signUpError: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -18,13 +20,29 @@ const userReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loggingIn: false,
-				error: null,
+				loginError: null,
 			};
 		case UserTypes.LOGIN_FAILURE:
 			return {
 				...state,
-				error: action.payload,
+				loginError: action.payload.error,
 				loggingIn: false,
+			};
+		case UserTypes.SIGNUP_START:
+			return {
+				...state,
+				signingUp: true,
+			};
+		case UserTypes.SIGNUP_SUCCESS:
+			return {
+				...state,
+				signingUp: false,
+			};
+		case UserTypes.SIGNUP_FAILURE:
+			return {
+				...state,
+				signUpError: action.payload.error,
+				signingUp: false,
 			};
 		case UserTypes.SET_CURRENT_USER:
 			return {

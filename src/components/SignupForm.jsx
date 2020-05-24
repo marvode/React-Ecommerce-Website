@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Input from "../components/Input";
 import LoginButton from "../components/LoginButton";
-import User from "../utils/User";
+import { signUpStart } from "../redux/user/user-action";
 
 class SignupForm extends Component {
 	constructor(props) {
@@ -12,19 +13,22 @@ class SignupForm extends Component {
 			email: null,
 			password: null,
 			password_confirmation: null,
-			response: {},
+			error: null,
 		};
 	}
 
 	handleSignupForm = (e) => {
 		e.preventDefault();
 		const { name, email, password, password_confirmation } = this.state;
-		User.signup({ name, email, password, password_confirmation }).then(
-			(res) => {
-				this.setState({ response: res });
-				console.log(this.state);
-			}
-		);
+		this.props.signup({
+			name,
+			email,
+			password,
+			password_confirmation,
+		});
+		this.props.signUpErrors
+			? this.setState({ error: this.props.signUpErrors })
+			: this.setState({ error: null });
 	};
 
 	handleChange = (e) => {
@@ -47,6 +51,17 @@ class SignupForm extends Component {
 						label="Name"
 						required
 					/>
+					{this.state.error && this.state.error.email ? (
+						<div>
+							{this.state.error.email.map((error) => (
+								<p className="mb-2 text-sm italic text-red-600">
+									{error}
+								</p>
+							))}
+						</div>
+					) : (
+						""
+					)}
 					<Input
 						name="email"
 						placeholder="Email"
@@ -55,6 +70,17 @@ class SignupForm extends Component {
 						label="Email"
 						required
 					/>
+					{this.state.error && this.state.error.password ? (
+						<div>
+							{this.state.error.password.map((error) => (
+								<p className="mb-2 text-sm italic text-red-600">
+									{error}
+								</p>
+							))}
+						</div>
+					) : (
+						""
+					)}
 					<Input
 						name="password"
 						placeholder="Password"
@@ -72,6 +98,7 @@ class SignupForm extends Component {
 						required
 					/>
 					<LoginButton
+						isLoading={this.props.signingUp}
 						value="Sign Up"
 						classes="bg-gray-700 text-white"
 						type="submit"
@@ -82,4 +109,13 @@ class SignupForm extends Component {
 	}
 }
 
-export default SignupForm;
+const mapStateToProps = (state) => ({
+	isSigningUp: state.user.signingUp,
+	signUpErrors: state.user.signUpError,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	signup: (userInfo) => dispatch(signUpStart(userInfo)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

@@ -75,7 +75,7 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	loginErrors: state.user.error,
+	loginErrors: state.user.loginError,
 	loggingIn: state.user.loggingIn,
 });
 

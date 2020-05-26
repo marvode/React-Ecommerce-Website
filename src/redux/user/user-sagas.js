@@ -32,7 +32,6 @@ export function* onLoginSuccess() {
 	try {
 		const userInfo = yield axios.get("/users/me");
 		yield put(setCurrentUser(userInfo.data.data));
-		yield (window.location = "/");
 	} catch (error) {
 		yield console.log("Couldn't get user information");
 	}

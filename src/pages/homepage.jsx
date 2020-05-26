@@ -1,19 +1,17 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import CategoryContainer from "../containers/category.container";
 
 import { fetchCategoriesStart } from "../redux/category/category-actions";
 
-class Homepage extends Component {
-	componentDidMount() {
-		this.props.fetchCategoriesStart();
-	}
+const Homepage = ({ fetchCategoriesStart }) => {
+	useEffect(() => {
+		fetchCategoriesStart();
+	}, [fetchCategoriesStart]);
 
-	render() {
-		return <CategoryContainer />;
-	}
-}
+	return <CategoryContainer />;
+};
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchCategoriesStart: () => dispatch(fetchCategoriesStart()),

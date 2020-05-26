@@ -1,19 +1,17 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { fetchCollectionStart } from "../redux/collection/collection-actions";
 import CollectionContainer from "../containers/collection.container";
 import { selectCategoryId } from "../redux/category/category-selectors";
 
-class Collection extends Component {
-	componentDidMount() {
-		this.props.fetchCollection(this.props.categoryId);
-	}
+const Collection = ({ fetchCollection, categoryId }) => {
+	useEffect(() => {
+		fetchCollection(categoryId);
+	}, [fetchCollection]);
 
-	render() {
-		return <CollectionContainer />;
-	}
-}
+	return <CollectionContainer />;
+};
 
 const mapStateToProps = (state, ownProps) => ({
 	categoryId: selectCategoryId(ownProps.match.params.categoryId)(state),

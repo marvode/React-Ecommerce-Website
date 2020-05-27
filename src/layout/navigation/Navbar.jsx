@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import AccountDropdown from "./components/AccountDropdown";
 import Item from "./components/Item";
 import Cart from "../../components/Cart";
+import CartButton from "../../components/CartButton";
 
 class Navbar extends Component {
 	constructor(props) {
@@ -34,7 +35,8 @@ class Navbar extends Component {
 							</svg>
 						</Link>
 					</div>
-					<div className="sm:hidden">
+					<div className="flex sm:hidden">
+						<CartButton classes="mr-4" />
 						<button
 							onClick={this.toggleMenu}
 							className="block border border-gray-700 p-2 text-gray-700 rounded focus:text-gray-900 focus:outline-none focus:shadow-outline hover:text-gray-900 hover:border-black"
@@ -56,7 +58,7 @@ class Navbar extends Component {
 					onClick={this.toggleMenu}
 				>
 					<Item classes="px-2 mt-1" body="Contact Us" to="/contact" />
-					<Cart />
+					<CartButton classes="hidden sm:block" />
 					{!this.props.currentUser ? (
 						<Item
 							classes="px-2 mt-1 sm:mr-2"

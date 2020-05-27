@@ -1,4 +1,4 @@
-import CartActionTypes, { ToggleCart } from "./cart-types";
+import CartActionTypes from "./cart-types";
 
 export const addItem = (item) => ({
 	type: CartActionTypes.ADD_CART_ITEM,
@@ -13,8 +13,4 @@ export const removeItem = (item) => ({
 export const clearItem = (item) => ({
 	type: CartActionTypes.CLEAR_CART_ITEM,
 	payload: item,
-});
-
-export const toggleCart = () => ({
-	type: ToggleCart,
 });

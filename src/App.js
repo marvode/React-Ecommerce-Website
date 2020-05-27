@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import Checkout from "./pages/checkout";
 import CategoryPage from "./pages/category";
 import PageHeader from "./layout/navigation/header";
+import ProductPage from "./pages/product";
 
 import { setCurrentUser, setUserToken } from "./redux/user/user-action";
 import User from "./utils/User";
@@ -17,7 +18,6 @@ import { selectCurrentUser } from "./redux/user/user-selectors";
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 
 const App = (props) => {
-	console.log(props);
 	const checkUserSession = () => {
 		if (props.currentUserToken) {
 			setAuthorizationHeader(props.currentUserToken.access_token);
@@ -45,6 +45,7 @@ const App = (props) => {
 					></Route>
 					<Route path="/categories" component={CategoryPage}></Route>
 					<Route path="/checkout" component={Checkout} />
+					<Route path="/product" component={ProductPage} />
 				</Switch>
 			</div>
 		</div>

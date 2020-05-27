@@ -1,19 +1,19 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import Collection from "../components/Collection";
+import Product from "../components/Product";
 
-const CategoryPage = ({ match }) => {
+const ProductPage = ({ match }) => {
 	return (
 		<div>
 			<Route exact path={match.path} render={() => <Redirect to="/" />} />
 			<Route
 				exact
-				path={`${match.path}/:categoryId`}
-				component={Collection}
+				path={`${match.path}/:productName`}
+				component={Product}
 			/>
 		</div>
 	);
 };
 
-export default CategoryPage;
+export default ProductPage;

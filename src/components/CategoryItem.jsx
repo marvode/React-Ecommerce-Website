@@ -6,7 +6,7 @@ class CategoryItem extends Component {
 		const { img, name, history } = this.props;
 		return (
 			<div
-				className="bg-white overflow-hidden antialiased shadow cursor-pointer"
+				className="bg-white overflow-hidden antialiased shadow rounded-lg cursor-pointer hover:opacity-75"
 				onClick={() => history.push(`/categories/${name}`)}
 			>
 				<div className="relative" style={{ paddingBottom: "100%" }}>
@@ -15,8 +15,12 @@ class CategoryItem extends Component {
 						src={img}
 						alt=""
 					/>
-					<div className="absolute w-3/4 p-3 bg-gray-100 bg-opacity-25">
-						<p className="text-center text-gray-900">{name}</p>
+					<div className="absolute bottom-0 w-full p-3 flex justify-center mb-16">
+						<div className="w-3/4 bg-gray-100 bg-opacity-25">
+							<p className="py-4 text-center text-gray-900 uppercase ">
+								{name}
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>

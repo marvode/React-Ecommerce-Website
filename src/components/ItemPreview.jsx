@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { addItem } from "../redux/cart/cart-actions";
 import { withRouter } from "react-router-dom";
 
-const ItemPreview = ({ item, addItem }) => {
+const ItemPreview = ({ item, addItem, history }) => {
 	const { img, name, price } = item;
 	return (
-		<div className="shadow overflow-hidden hover:shadow-lg">
+		<div className="shadow overflow-hidden hover:shadow-lg rounded-lg">
 			<div className="bg-white antialiased shadow">
 				<div className="relative" style={{ paddingBottom: "100%" }}>
 					<img
@@ -15,18 +15,24 @@ const ItemPreview = ({ item, addItem }) => {
 						src={img}
 						alt=""
 					/>
-					<button
-						className="absolute w-3/4 p-3 bg-gray-100 bg-opacity-25 hover:bg-black"
-						onClick={() => addItem(item)}
-					>
-						<p className="text-center text-gray-900 hover:text-white">
+					<div className="absolute bottom-0 mb-16 flex justify-center w-full space-x-4">
+						<button
+							className="w-2/5 p-3 bg-gray-100 bg-opacity-25 hover:bg-black hover:text-white"
+							onClick={() => addItem(item)}
+						>
 							ADD TO CART
-						</p>
-					</button>
+						</button>
+						<button
+							className="w-2/5 p-3 bg-gray-100 bg-opacity-25 hover:bg-black hover:text-white"
+							onClick={() => history.push(`/product/${name}`)}
+						>
+							VIEW ITEM
+						</button>
+					</div>
 				</div>
 			</div>
-			<div className="flex justify-between py-2 px-5">
-				<span>{name}</span>
+			<div className="flex justify-between py-4 px-5">
+				<span className="uppercase">{name}</span>
 				<span className="pr-3">$ {price}</span>
 			</div>
 		</div>

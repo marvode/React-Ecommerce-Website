@@ -1,7 +1,8 @@
 import axios from "axios";
 
-import { setUserToken } from "../redux/user/user-action";
+import { setUserToken, logoutUser } from "../redux/user/user-action";
 import { put } from "redux-saga/effects";
+import { store } from "../redux/store";
 
 export const setAuthorizationHeader = (access_token) =>
 	(axios.defaults.headers["Authorization"] = `Bearer ${access_token}`);
@@ -37,11 +38,11 @@ export const filterRequest = (refresh_token) => {
 					})
 						.then((res) => res.json())
 						.then((res) => {
-							console.log(res);
 							if (res.error) {
-								return reject("token revoked");
+								store.dispatch(logoutUser());
+								return reject(res);
 							}
-							put(
+							store.dispatch(
 								setUserToken({
 									access_token: res.access_token,
 									refresh_token: res.refresh_token,
@@ -54,7 +55,10 @@ export const filterRequest = (refresh_token) => {
 
 							return axios(originalReq);
 						})
-						.catch((err) => console.log(err));
+						.catch((err) => {
+							console.log(err);
+							put(logoutUser());
+						});
 
 					resolve(res);
 				}

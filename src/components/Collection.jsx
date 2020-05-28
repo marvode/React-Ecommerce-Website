@@ -8,7 +8,7 @@ import { selectCategoryId } from "../redux/category/category-selectors";
 const Collection = ({ fetchCollection, categoryId }) => {
 	useEffect(() => {
 		fetchCollection(categoryId);
-	}, [fetchCollection]);
+	}, [fetchCollection, categoryId]);
 
 	return <CollectionContainer />;
 };

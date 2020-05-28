@@ -7,6 +7,7 @@ import Item from "./components/Item";
 import CartButton from "../../components/CartButton";
 import SearchInput from "../../components/SearchInput";
 import SearchButton from "../../components/SearchButton";
+import { selectCurrentUser } from "../../redux/user/user-selectors";
 
 const Navbar = (props) => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -48,7 +49,10 @@ const Navbar = (props) => {
 					</button>
 				</div>
 			</div>
-			<div className="flex justify-center py-3" id="search">
+			<div
+				className="flex hidden justify-center py-3 sm:py-0"
+				id="search"
+			>
 				<SearchInput />
 			</div>
 			<div
@@ -56,7 +60,7 @@ const Navbar = (props) => {
 				id="menu"
 				onClick={toggleMenu}
 			>
-				<SearchButton />
+				<SearchButton classes="hidden sm:block" />
 				<Item classes="px-2 mt-1" body="Contact Us" to="/contact" />
 				<CartButton classes="hidden sm:block" />
 				{!props.currentUser ? (
@@ -68,7 +72,7 @@ const Navbar = (props) => {
 				) : (
 					<AccountDropdown
 						classes="sm:ml-4"
-						user={props.currentUser.user}
+						user={props.currentUser}
 					/>
 				)}
 			</div>
@@ -77,7 +81,7 @@ const Navbar = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-	currentUser: state.user.currentUser,
+	currentUser: selectCurrentUser(state),
 });
 
 export default connect(mapStateToProps)(Navbar);

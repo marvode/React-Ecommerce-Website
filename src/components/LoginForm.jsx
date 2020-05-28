@@ -17,7 +17,7 @@ const LoginForm = (props) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { username, password } = userCredentials;
-		props.login({ username, password });
+		props.login({ username, password, grant_type: "password" });
 		props.loginErrors
 			? setUserCredentials({ ...userCredentials, error: true })
 			: setUserCredentials({ ...userCredentials, error: false });

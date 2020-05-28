@@ -17,7 +17,7 @@ class CategoryItem extends Component {
 					/>
 					<div className="absolute bottom-0 w-full p-3 flex justify-center mb-16">
 						<div className="w-3/4 bg-gray-100 bg-opacity-25">
-							<p className="py-4 text-center text-gray-900 uppercase ">
+							<p className="py-3 text-center text-gray-900 uppercase ">
 								{name}
 							</p>
 						</div>

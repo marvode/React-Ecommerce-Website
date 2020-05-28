@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -12,28 +12,34 @@ import ProductPage from "./pages/product";
 
 import { setCurrentUser, setUserToken } from "./redux/user/user-action";
 import User from "./utils/User";
-import { setAuthorizationHeader } from "./utils/AppConfig";
+import { setAuthorizationHeader, filterRequest } from "./utils/AppConfig";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 
 const App = (props) => {
+	const [user, setUser] = useState(undefined);
+
 	const checkUserSession = () => {
-		if (props.currentUserToken) {
-			setAuthorizationHeader(props.currentUserToken.access_token);
-			User.loggedInUser().then((res) => {
-				props.setCurrentUser({ user: res });
-			});
-		}
+		setAuthorizationHeader(props.currentUserToken.access_token);
+		User.loggedInUser().then((res) => {
+			if (res.data) {
+				props.setCurrentUser(res.data);
+				setUser(res.data);
+			}
+		});
 	};
 
 	useEffect(() => {
-		checkUserSession();
-	}, [props.setCurrentUser]);
+		if (props.currentUserToken) {
+			filterRequest(props.currentUserToken.refresh_token);
+			checkUserSession();
+		}
+	}, []);
 
 	return (
 		<div className="App text-gray-800">
-			<PageHeader />
+			<PageHeader user={user} />
 			<div className="py-8 px-6 sm:px-12">
 				<Switch>
 					<Route exact path="/" component={Homepage} />

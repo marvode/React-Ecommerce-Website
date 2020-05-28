@@ -1,10 +1,66 @@
 import axios from "axios";
 
-export const setAuthorizationHeader = (access_token) => {
-	axios.defaults.headers.common = {
-		"X-Requested-With": "XMLHttpRequest",
-		"Content-Type": "application/json",
-		Accept: "application/json",
-		Authorization: `Bearer ${access_token}`,
-	};
+import { setUserToken } from "../redux/user/user-action";
+import { put } from "redux-saga/effects";
+
+export const setAuthorizationHeader = (access_token) =>
+	(axios.defaults.headers["Authorization"] = `Bearer ${access_token}`);
+
+export const filterRequest = (refresh_token) => {
+	axios.interceptors.response.use(
+		(response) => {
+			return response;
+		},
+		(err) => {
+			return new Promise((resolve, reject) => {
+				const originalReq = err.config;
+				if (
+					err.response.status === 401 &&
+					err.config &&
+					!err.config.__isRetryRequest
+				) {
+					originalReq._retry = true;
+
+					let res = fetch("http://127.0.0.1:8000/oauth/token", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							Device: "device",
+							Accept: "application/json",
+						},
+						redirect: "follow",
+						referrer: "no-referrer",
+						body: JSON.stringify({
+							grant_type: "refresh_token",
+							refresh_token: refresh_token,
+						}),
+					})
+						.then((res) => res.json())
+						.then((res) => {
+							console.log(res);
+							if (res.error) {
+								return reject("token revoked");
+							}
+							put(
+								setUserToken({
+									access_token: res.access_token,
+									refresh_token: res.refresh_token,
+								})
+							);
+							originalReq.headers[
+								"Authorization"
+							] = `Bearer ${res.access_token}`;
+							originalReq.headers["Device"] = "device";
+
+							return axios(originalReq);
+						})
+						.catch((err) => console.log(err));
+
+					resolve(res);
+				}
+
+				return Promise.reject(err);
+			});
+		}
+	);
 };

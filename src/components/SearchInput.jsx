@@ -4,7 +4,7 @@ const SearchInput = () => {
 	return (
 		<form>
 			<input
-				className=" focus:outline-none border-b"
+				className="focus:outline-none border-b border-gray-500"
 				name="search"
 				placeholder="Search"
 			/>

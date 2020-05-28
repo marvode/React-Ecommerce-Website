@@ -5,7 +5,10 @@ const SearchButton = ({ classes }) => {
 		document.getElementById("search").classList.toggle("hidden");
 	};
 	return (
-		<button className={classes} onClick={toggleSearch}>
+		<button
+			className={`focus:outline-none  ${classes}`}
+			onClick={toggleSearch}
+		>
 			<span>Search</span>
 		</button>
 	);

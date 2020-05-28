@@ -27,8 +27,12 @@ export default class User {
 		let response = [];
 		await axios
 			.get("/users/me")
-			.then((res) => response.push(res.data.data))
-			.catch((error) => response.push(error.response.data));
+			.then((res) => {
+				if (res.data) {
+					response.push(res.data);
+				}
+			})
+			.catch((error) => response.push(error));
 		return response[0];
 	}
 }

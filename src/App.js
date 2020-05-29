@@ -13,7 +13,7 @@ import ProductPage from "./pages/product";
 
 import { setCurrentUser, setUserToken } from "./redux/user/user-action";
 import User from "./utils/User";
-import { setAuthorizationHeader, filterRequest } from "./utils/AppConfig";
+import { filterRequest } from "./utils/AppConfig";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000";
@@ -22,7 +22,6 @@ const App = (props) => {
 	const [user, setUser] = useState(undefined);
 
 	const checkUserSession = () => {
-		setAuthorizationHeader(props.currentUserToken.access_token);
 		User.loggedInUser().then((res) => {
 			if (res.data) {
 				props.setCurrentUser(res.data);
@@ -36,6 +35,7 @@ const App = (props) => {
 			filterRequest(props.currentUserToken.refresh_token);
 			checkUserSession();
 		}
+		// eslint-disable-next-line
 	}, [props.currentUserToken]);
 
 	return (

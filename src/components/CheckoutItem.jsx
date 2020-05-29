@@ -28,7 +28,7 @@ const CheckoutItem = ({ item, clearItem, addItem, removeItem }) => {
 					&#10095;
 				</button>
 			</td>
-			<td>{price}</td>
+			<td>$ {price}</td>
 			<td>
 				<button onClick={() => clearItem(item)}>&#10005;</button>
 			</td>

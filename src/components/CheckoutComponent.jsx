@@ -8,10 +8,10 @@ import StripeButton from "../components/StripeButton";
 
 const CheckoutComponent = ({ cartItems, total }) => {
 	return (
-		<div className="w-4/5">
-			<table className="table-fixed">
+		<div className="grid grid-cols-1">
+			<table className="table-fixed sm:mx-10 lg:mx-20 xl:mx-64 mt-5">
 				<thead>
-					<tr className="border-b border-gray-700 p-5">
+					<tr className="border-b border-gray-700">
 						<th className="w-1/5 px-4 py-2">Product</th>
 						<th className="w-1/5 px-4 py-2">Description</th>
 						<th className="w-1/5 px-4 py-2">Quantity</th>
@@ -24,15 +24,16 @@ const CheckoutComponent = ({ cartItems, total }) => {
 						<CheckoutItem key={cartItem.id} item={cartItem} />
 					))}
 
-					<tr>
+					{/* <tr>
 						<td className="w-1/5 px-4 py-2">Total </td>
 						<td className="w-1/5 px-4 py-2"></td>
 						<td className="w-1/5 px-4 py-2"></td>
-						<td className="w-1/5 px-4 py-2">{total}</td>
+						<td className="w-1/5 px-4 py-2">$ {total}</td>
 						<td className="w-1/5 px-4 py-2"></td>
-					</tr>
+					</tr> */}
 				</tbody>
 			</table>
+			<div className="mt-5 text-xl">Total: $ {total}</div>
 			<div className="text-center my-10 text-lg text-red-700">
 				Use the following test credit card for payments
 				<br />

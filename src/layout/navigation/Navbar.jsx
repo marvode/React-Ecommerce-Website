@@ -18,7 +18,7 @@ const Navbar = (props) => {
 	};
 
 	return (
-		<nav className="sm:px-10 sm:py-3 sm:flex sm:items-center justify-between shadow">
+		<nav className="sm:px-10 sm:py-3 sm:flex sm:items-center justify-between shadow navbar">
 			<div className="flex px-6 py-3 sm:p-0 justify-between items-center">
 				<div className="text-gray-700">
 					<Link to="/">

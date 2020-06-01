@@ -41,7 +41,7 @@ const Navbar = (props) => {
 					<CartButton classes="mr-4" />
 					<button
 						onClick={toggleMenu}
-						className="block border border-gray-700 p-2 text-gray-700 rounded focus:text-gray-900 focus:outline-none focus:shadow-outline hover:text-gray-900 hover:border-black"
+						className="block p-2 text-gray-500 rounded-full focus:bg-gray-300 focus:text-gray-700 focus:outline-none hover:bg-gray-300 hover:text-gray-700 hover:border-black"
 					>
 						<svg
 							className="fill-current h-5 w-5"

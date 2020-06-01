@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import CollectionOverview from "../components/CollectionOverview";
 import SpinnerHOC from "../components/SpinnerHOC";
 import {
-	selectIsCollectionLoaded,
 	selectCollections,
+	selectIsCollectionFetching,
 } from "../redux/collection/collection-selectors";
 import { createStructuredSelector } from "reselect";
 
 const mapStateToProps = createStructuredSelector({
 	collections: selectCollections,
-	isLoading: (state) => !selectIsCollectionLoaded(state),
+	isLoading: selectIsCollectionFetching,
 });
 
 const CollectionContainer = compose(

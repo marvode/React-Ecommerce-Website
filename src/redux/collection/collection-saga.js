@@ -7,10 +7,12 @@ import {
 	fetchCollectionFailure,
 } from "./collection-actions";
 
-function* fetchCollectionAsync({ categoryId }) {
+function* fetchCollectionAsync({ categoryId, categoryName }) {
 	try {
 		const response = yield axios.get(`/categories/${categoryId}/products`);
-		yield put(fetchCollectionSuccess(response.data.data));
+		yield put(
+			fetchCollectionSuccess({ [categoryName]: response.data.data })
+		);
 	} catch (error) {
 		yield put(fetchCollectionFailure(error));
 	}

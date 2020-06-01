@@ -10,7 +10,7 @@ import {
 import { createStructuredSelector } from "reselect";
 
 const mapStateToProps = createStructuredSelector({
-	collection: selectCollections,
+	collections: selectCollections,
 	isLoading: (state) => !selectIsCollectionLoaded(state),
 });
 

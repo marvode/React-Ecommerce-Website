@@ -1,10 +1,11 @@
-import axios from "axios";
+// import axios from "axios";
 
 import CollectionTypes from "./collection-types";
 
-export const fetchCollectionStart = (categoryId) => ({
+export const fetchCollectionStart = (categoryId, categoryName) => ({
 	type: CollectionTypes.FETCH_COLLECTION_START,
 	categoryId,
+	categoryName,
 });
 
 export const fetchCollectionSuccess = (collection) => ({
@@ -17,14 +18,14 @@ export const fetchCollectionFailure = (error) => ({
 	payload: error,
 });
 
-export const fetchCollectionStartAsync = (categoryId) => {
-	return (dispatch) => {
-		dispatch(fetchCollectionStart());
-		axios
-			.get(`/categories/${categoryId}/products`)
-			.then((res) => {
-				dispatch(fetchCollectionSuccess(res.data.data));
-			})
-			.catch((error) => dispatch(fetchCollectionFailure(error)));
-	};
-};
+// export const fetchCollectionStartAsync = (categoryId) => {
+// 	return (dispatch) => {
+// 		dispatch(fetchCollectionStart());
+// 		axios
+// 			.get(`/categories/${categoryId}/products`)
+// 			.then((res) => {
+// 				dispatch(fetchCollectionSuccess(res.data.data));
+// 			})
+// 			.catch((error) => dispatch(fetchCollectionFailure(error)));
+// 	};
+// };

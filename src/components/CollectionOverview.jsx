@@ -3,7 +3,9 @@ import { withRouter } from "react-router-dom";
 
 import ItemPreview from "./ItemPreview";
 
-const CollectionOverview = ({ collection, match }) => {
+const CollectionOverview = ({ collections, match }) => {
+	const collection = collections[match.params.categoryId];
+	console.log(collection);
 	return (
 		<div>
 			<div className="mb-4">

@@ -5,10 +5,10 @@ import { fetchCollectionStart } from "../redux/collection/collection-actions";
 import CollectionContainer from "../containers/collection.container";
 import { selectCategoryId } from "../redux/category/category-selectors";
 
-const Collection = ({ fetchCollection, categoryId }) => {
+const Collection = ({ fetchCollection, categoryId, match }) => {
 	useEffect(() => {
-		fetchCollection(categoryId);
-	}, [fetchCollection, categoryId]);
+		fetchCollection(categoryId, match.params.categoryId);
+	}, [fetchCollection, categoryId, match.params.categoryId]);
 
 	return <CollectionContainer />;
 };
@@ -18,7 +18,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchCollection: (categoryId) => dispatch(fetchCollectionStart(categoryId)),
+	fetchCollection: (categoryId, categoryName) =>
+		dispatch(fetchCollectionStart(categoryId, categoryName)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Collection);

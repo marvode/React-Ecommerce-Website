@@ -7,6 +7,13 @@ export const selectCollections = createSelector(
 	(collection) => collection.collection
 );
 
+export const selectACollection = (categoryId) => {
+	return createSelector(
+		[selectCollection],
+		(collection) => collection.collection[categoryId]
+	);
+};
+
 export const selectIsCollectionFetching = createSelector(
 	[selectCollection],
 	(collection) => collection.isFetchingCollection

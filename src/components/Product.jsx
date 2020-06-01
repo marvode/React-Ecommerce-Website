@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { addItem } from "../redux/cart/cart-actions";
 
-const Product = ({ product }) => {
+const Product = ({ product, addItem }) => {
 	return (
 		<div className="mx-10">
 			<div className="sm:flex justify-center w-full space-x-6">
@@ -36,13 +36,18 @@ const Product = ({ product }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-	product: state.collection.collection.filter(
+	// products: state.collection.collection.filter(
+	// 	(collection) => collection.name === ownProps.match.params.productName
+	// )[0],
+	product: state.collection.collection[
+		Object.keys(state.collection.collection)[0]
+	].filter(
 		(collection) => collection.name === ownProps.match.params.productName
 	)[0],
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addItem: (item) => dispatch(addItem(item)),
+	addItem: (product) => dispatch(addItem(product)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

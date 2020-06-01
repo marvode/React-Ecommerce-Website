@@ -6,7 +6,6 @@ import Logout from "./Logout";
 const AccountDropdown = (props) => {
 	const [accountDropdown, setAccountDropdown] = useState({
 		isAccountOpen: false,
-		img: "http://localhost:3000/img/7.jpg",
 	});
 
 	const toggleAccount = () => {
@@ -71,7 +70,7 @@ const AccountDropdown = (props) => {
 				<div className="flex items-center">
 					<img
 						className="h-8 w-8 rounded-full object-cover border-2 border-gray-100"
-						src={accountDropdown.img}
+						src={props.user.img}
 						alt=""
 					/>
 					{!!props.user ? (

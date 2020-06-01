@@ -21,22 +21,17 @@ axios.defaults.baseURL = "http://127.0.0.1:8000";
 const App = (props) => {
 	const [user, setUser] = useState(undefined);
 
-	const checkUserSession = () => {
-		User.loggedInUser().then((res) => {
-			if (res.data) {
-				props.setCurrentUser(res.data);
-				setUser(res.data);
-			}
-		});
-	};
-
 	useEffect(() => {
 		if (props.currentUserToken) {
 			filterRequest(props.currentUserToken.refresh_token);
-			checkUserSession();
+			User.loggedInUser().then((res) => {
+				if (res.data) {
+					props.setCurrentUser(res.data);
+					setUser(res.data);
+				}
+			});
 		}
-		// eslint-disable-next-line
-	}, [props.currentUserToken]);
+	}, []);
 
 	return (
 		<div className="App text-gray-800">

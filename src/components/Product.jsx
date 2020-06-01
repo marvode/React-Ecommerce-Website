@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { addItem } from "../redux/cart/cart-actions";
 
 const Product = ({ product }) => {
-	console.log(product);
 	return (
 		<div className="mx-10">
 			<div className="sm:flex justify-center w-full space-x-6">

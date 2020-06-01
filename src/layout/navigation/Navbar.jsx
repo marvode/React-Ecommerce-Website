@@ -11,10 +11,15 @@ import { selectCurrentUser } from "../../redux/user/user-selectors";
 
 const Navbar = (props) => {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [showSearch, setShowSearch] = useState(false);
 
 	const toggleMenu = () => {
 		document.getElementById("menu").classList.toggle("hidden");
 		setMenuOpen(!menuOpen);
+	};
+
+	const toggleSearch = () => {
+		setShowSearch(!showSearch);
 	};
 
 	return (
@@ -32,7 +37,7 @@ const Navbar = (props) => {
 					</Link>
 				</div>
 				<div className="flex sm:hidden">
-					<SearchButton />
+					<SearchButton click={toggleSearch} />
 					<CartButton classes="mr-4" />
 					<button
 						onClick={toggleMenu}
@@ -49,18 +54,19 @@ const Navbar = (props) => {
 					</button>
 				</div>
 			</div>
-			<div
-				className="flex hidden justify-center py-3 sm:py-0"
-				id="search"
-			>
-				<SearchInput />
-			</div>
+			{showSearch ? (
+				<div className="flex justify-center py-3 sm:py-0" id="search">
+					<SearchInput />
+				</div>
+			) : (
+				""
+			)}
 			<div
 				className="hidden sm:flex px-5 pb-2 sm:pb-0"
 				id="menu"
 				onClick={toggleMenu}
 			>
-				<SearchButton classes="hidden sm:block" />
+				<SearchButton classes="hidden sm:block" click={toggleSearch} />
 				<Item classes="px-2 mt-1" body="Contact Us" to="/contact" />
 				<CartButton classes="hidden sm:block" />
 				{!props.currentUser ? (

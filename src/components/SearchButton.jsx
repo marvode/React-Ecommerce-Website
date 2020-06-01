@@ -1,14 +1,8 @@
 import React from "react";
 
-const SearchButton = ({ classes }) => {
-	const toggleSearch = () => {
-		document.getElementById("search").classList.toggle("hidden");
-	};
+const SearchButton = ({ classes, click }) => {
 	return (
-		<button
-			className={`focus:outline-none  ${classes}`}
-			onClick={toggleSearch}
-		>
+		<button className={`focus:outline-none  ${classes}`} onClick={click}>
 			<span>Search</span>
 		</button>
 	);

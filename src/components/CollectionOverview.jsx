@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 
 import ItemPreview from "./ItemPreview";
 
 const CollectionOverview = ({ collections, match }) => {
-	const collection = collections[match.params.categoryId];
+	const [collection, setCollection] = useState([]);
+	useEffect(() => {
+		setCollection(collections[match.params.categoryId]);
+		console.log(collections);
+	}, [collections, match.params.categoryId]);
 	return (
 		<div>
 			<div className="mb-4">

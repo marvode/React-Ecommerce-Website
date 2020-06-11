@@ -25,7 +25,7 @@ const App = (props) => {
 	const [user, setUser] = useState(undefined);
 
 	useEffect(() => {
-		Aos.init({ duration: 1000 });
+		Aos.init({ duration: 750 });
 		if (props.currentUserToken) {
 			filterRequest(props.currentUserToken.refresh_token);
 			User.loggedInUser().then((res) => {

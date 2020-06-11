@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import CollectionOverview from "../components/CollectionOverview";
 import SpinnerHOC from "../components/SpinnerHOC";
 import {
-	selectCollections,
 	selectIsCollectionFetching,
+	selectCollections,
 } from "../redux/collection/collection-selectors";
 import { createStructuredSelector } from "reselect";
 

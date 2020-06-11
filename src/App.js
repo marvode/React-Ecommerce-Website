@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
+import Aos from "aos";
+
+import "aos/dist/aos.css";
 
 import ErrorBoundary from "./components/ErrorBoundary";
 import Homepage from "./pages/homepage";
@@ -22,6 +25,7 @@ const App = (props) => {
 	const [user, setUser] = useState(undefined);
 
 	useEffect(() => {
+		Aos.init({ duration: 1000 });
 		if (props.currentUserToken) {
 			filterRequest(props.currentUserToken.refresh_token);
 			User.loggedInUser().then((res) => {

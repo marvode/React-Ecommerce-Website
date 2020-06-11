@@ -8,6 +8,8 @@ class CategoryItem extends Component {
 			<div
 				className="bg-white overflow-hidden antialiased shadow rounded-lg cursor-pointer hover:opacity-75"
 				onClick={() => history.push(`/categories/${name}`)}
+				data-aos="fade-up"
+				data-aos-easeing="ease-in-out"
 			>
 				<div className="relative" style={{ paddingBottom: "100%" }}>
 					<img
